@@ -18,7 +18,7 @@ const UserChatComponent = () => {
                         {
                             Array.from({ length: 20 }).map((_, id) =>
                                 <div>
-                                    <p>Chat history</p>
+                                    {/* <p>Chat history</p> */}
                                     <p>
                                         <p className="bg-primary p-3 ms-2 text-light rounded-pill">
                                             <b>Support wrote:</b> Hello,World!This is a toast message.
