@@ -1,18 +1,122 @@
-import CategoryCartComponent from "../components/CategoryCartComponent";
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { FaRegHandshake, FaTractor, FaHeart } from 'react-icons/fa';
+import { GiFarmTractor } from 'react-icons/gi';
+import { MdLocalOffer } from 'react-icons/md';
 import ProductCarousalComponent from "../components/user/ProductCarousalComponent";
-import { Row, Container } from "react-bootstrap";
-const HomePage = () => {//arrow function
-    const categories = ['Tablets', 'Monitors', 'Games','Milk'];
-    return (<> <ProductCarousalComponent />
-        <Container>
-            <Row xs={1} md={2} className="g-4 mt-5">
-                {
-                    categories.map((category, idx) => <CategoryCartComponent key={idx} category={category} idx={idx} />)
-                }
-            </Row>
-        </Container>
-    </>
-    )
+const HomePage = () => {
+    const [backgroundImage, setBackgroundImage] = useState("url('/images/farmer2.jpg')");
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const images = [
+                "url('/images/f3.jpg')",
+                "url('/images/farmer3.jpg')",
+                "url('/images/farmer2.jpg')"
+               
+            ];
+            const randomImage = images[Math.floor(Math.random() * images.length)];
+            setBackgroundImage(randomImage);
+        }, 5000);
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <>
+        <ProductCarousalComponent />
+        <p></p>
+            <div
+                style={{
+                    backgroundImage,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    height: "115vh"
+                }}
+            >
+                <Container>
+                    <Row>
+                        <Col>
+                            <h1 className="display-4 text-center mb-5" style={{ fontFamily: 'Arial', fontSize: '48px', fontWeight: 'bold', color: 'black' }}>About Us</h1>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={6}>
+                            <h2 className="mb-3">
+                                <GiFarmTractor className="mr-2" /> Dairy Farmer's Situation
+                            </h2>
+                            <p className="dark text-justify" style={{ fontSize: '20px', fontWeight: 'bold' }}>
+                                Dairy farmers in India face several challenges such as low milk productivity, inadequate infrastructure,
+                                limited access to finance and markets, and climate change issues. These challenges lead to lower prices and
+                                income for many farmers. However, the government and other organizations are implementing various initiatives to
+                                address these issues, such as improving productivity, access to markets, and infrastructure for dairy farmers.
+                                Despite these challenges, dairy farming remains an essential source of livelihood for millions of people in India.
+                            </p>
+                        </Col>
+                        <Col md={6}>
+                            <h2 className="mb-3">
+                                < FaRegHandshake className="mr-2" /> Our Mission
+                            </h2>
+                            <p className="dark text-justify" style={{ fontSize: '20px', fontWeight: 'bold' }}>
+                                We are an online platform that connects dairy farmers directly to
+                                customers without any middlemen. Our mission is to create a
+                                sustainable future for dairy farmers by providing them with a
+                                direct connection to customers. By cutting out the middlemen, we
+                                ensure that farmers receive fair prices for their products so
+                                that customers can get the freshest dairy products possible.
+                            </p>
+                        </Col>
+                    </Row>
+                    <Row className="mt-5">
+                        <Col>
+                            <h2 className="mb-3">
+                                <MdLocalOffer className="mr-2" /> Our Values
+                            </h2>
+                            <div className="d-flex flex-wrap">
+                                <div
+                                    className="card mb-3 mx-2"
+                                    style={{ maxWidth: "18rem" }}
+                                >
+                                    <div className="card-body">
+                                        <h5 className="card-title">
+                                            <FaTractor className="mr-2" /> Farm Fresh
+                                        </h5>
+                                        <p className="card-text" style={{ fontSize: '20px' }}>
+                                            We believe in providing our customers with the freshest milk,dairy
+                                            products possible. All of our products come directly from
+                                            the farm to your doorstep.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    className="card mb-3 mx-2"
+                                    style={{ maxWidth: "18rem" }}
+                                >
+                                    <div className="card-body">
+                                        <h5 className="card-title"><FaHeart className="mr-2" /> Commitment</h5>
+                                        <p className="card-text" style={{ fontSize: '20px' }}>
+                                            Our website also offers farmers the opportunity to showcase their products to a wider audience.
+                                            This helps farmers to expand their customer base,
+                                            increase their revenue, and build a sustainable business model for the future.
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <div className="card mb-3 mx-2" style={{ maxWidth: "18rem" }}>
+                                    <div className="card-body">
+                                        <h5 className="card-title"><FaRegHandshake className="mr-2" /> Fairness</h5>
+                                        <p className="card-text" style={{ fontSize: '20px' }}>We believe in treating our farmers and customers with fairness and respect. That's why we ensure that our farmers receive fair prices for their products.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+            <p style={{
+                    height: "50vh"
+                }}></p>
+        </>
+    );
 };
-export default HomePage;// i do export here in order to import that file here in App.js
+export default HomePage;

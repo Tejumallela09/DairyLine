@@ -5,6 +5,8 @@ const UserChatComponent = () => {
             <input type="checkbox" id="check" />
             <label className="chat-btn" htmlFor="check">
                 <i className="bi bi-chat-left-dots-fill comment"></i>
+                <span className="position-absoulute top-0 start-10
+                translate-middle p-2 bg-danger border border-light rounded-circle"></span>
                 <i className="bi bi-x-circle-fill close"></i>
             </label>
             <div className="chat-wrapper">

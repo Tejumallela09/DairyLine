@@ -21,7 +21,7 @@ const ProductCarousalComponent = () => {
         <Carousel.Caption>
           <LinkContainer style={cursorP}
             to="/product-details">
-            <h3>First slide label</h3>
+            {/* <h3>First slide label</h3> */}<h3></h3>
           </LinkContainer>
           {/* <h3>First slide label</h3>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
@@ -29,6 +29,7 @@ const ProductCarousalComponent = () => {
       </Carousel.Item>
       <Carousel.Item>
         <img
+          crossorigin="anonymous"
           className="d-block w-100"
           style={
             {
@@ -42,7 +43,8 @@ const ProductCarousalComponent = () => {
         <Carousel.Caption>
           <LinkContainer style={cursorP}
             to="/product-details">
-            <h3>Second slide label</h3>
+            {/* <h3>Second slide label</h3> */}
+            <h3></h3>
           </LinkContainer>
           {/* <h3>Second slide label</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
@@ -50,6 +52,7 @@ const ProductCarousalComponent = () => {
       </Carousel.Item>
       <Carousel.Item>
         <img
+          crossorigin="anonymous"
           className="d-block w-100"
           style={
             {
@@ -62,7 +65,7 @@ const ProductCarousalComponent = () => {
         <Carousel.Caption>
           <LinkContainer style={cursorP}
             to="/product-details">
-            <h3>Third slide label</h3>
+            {/* <h3>Third slide label</h3> */}<h3></h3>
           </LinkContainer>
           {/* <h3>Third slide label</h3>
           <p>
@@ -84,7 +87,7 @@ const ProductCarousalComponent = () => {
         <Carousel.Caption>
           <LinkContainer style={cursorP}
             to="/product-details">
-            <h3>Third slide label</h3>
+            {/* <h3>Third slide label</h3> */}<h3></h3>
           </LinkContainer>
           {/* <h3>Third slide label</h3>
           <p>
