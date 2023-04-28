@@ -2,6 +2,7 @@ import { Container, Row, Col,Button } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
 import SortOptionsComponent from '../components/SortOptionsComponent.js'
 import RatingfilterComponent from '../components/filterQueryResultOptions/RatingFilterComponent.js'
+import ProductForListComponent from '../components/ProductForListComponent.js'
 const ProductListPage = () => {//arrow function
     // return <p>This is Product List Page </p>
     return (
@@ -14,14 +15,18 @@ const ProductListPage = () => {//arrow function
                         {/* <ListGroup.Item>Morbi leo risus</ListGroup.Item>
                         <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
                         <ListGroup.Item>Vestibulum at eros</ListGroup.Item> */}
-                        <ListGroup.Item>
+                        {/* <ListGroup.Item>
                         <Button variant="primary">Primary</Button>{' '}
                         <Button variant="danger">Danger</Button>{' '}
-                        </ListGroup.Item>
+                        </ListGroup.Item> */}
                     </ListGroup>
                 </Col>
                 <Col md={9}>
-
+                    {Array.from({length:5}).map((_,idx)=>(
+                             <ProductForListComponent key={idx}
+                              images ={["games","monitors","tablets","games","monitors"]}/>
+                    ))}
+                       
                 </Col>
             </Row>
         </Container>

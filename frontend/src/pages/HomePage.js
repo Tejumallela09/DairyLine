@@ -9,6 +9,7 @@ const HomePage = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
+            document.body.style = 'rgba(255, 255, 255, 0.25)';
             const images = [
                 "url('/images/f3.jpg')",
                 "url('/images/farmer3.jpg')",
