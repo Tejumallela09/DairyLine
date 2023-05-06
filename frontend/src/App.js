@@ -27,8 +27,11 @@ import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
 import AdminOrderDetailsPage from "./pages/admin/AdminOrderDetailsPage";
 import AdminChartsPage from "./pages/admin/AdminChartsPage";
 import AdminAnalyticsPage from "./pages/admin/AdminAnalyticsPage";
-
-
+import FarmerProfilepage from "./pages/farmer/FarmerProfilepage";
+import FarmerCreateProductspage from "./pages/farmer/FarmerCreateProductspage";
+import FarmerEditProductPage from "./pages/farmer/FarmerEditProductPage";
+import FarmerOrderDetailsPage from "./pages/farmer/FarmerOrderDetailsPage";
+import FarmerProductPage from "./pages/farmer/FarmerProductPage";
 function App() {
   return (
     <BrowserRouter>
@@ -48,6 +51,13 @@ function App() {
       <Route element={<ProtectedRoutesComponent admin={false}/>}>
       <Route path="/user-profile" element={ <UserProfilePage />} />
       <Route path="/user-orders" element={ <UserOrderPage />} />
+      <Route path="/user-cart-details" element={ <UserCartDetailsPage />} />
+      <Route path="/user-order-details" element={ <UserOrderDetailsPage />} />
+      </Route>
+      {/* farmer protected routes: */}
+      <Route element={<ProtectedRoutesComponent admin={false}/>}>
+      <Route path="/farmer-profile" element={ <FarmerProfilepage />} />
+      <Route path="/farmer-create-products" element={ <FarmerCreateProductspage />} />
       <Route path="/user-cart-details" element={ <UserCartDetailsPage />} />
       <Route path="/user-order-details" element={ <UserOrderDetailsPage />} />
       </Route>
