@@ -26,6 +26,7 @@ import AdminEditProductPage from "./pages/admin/AdminEditProductPage";
 import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
 import AdminOrderDetailsPage from "./pages/admin/AdminOrderDetailsPage";
 import AdminChartsPage from "./pages/admin/AdminChartsPage";
+import AdminChatsPage from "./pages/admin/AdminChatsPage";
 import AdminAnalyticsPage from "./pages/admin/AdminAnalyticsPage";
 import ScrollToTop from "./utils/ScrollToTop";
 //protected farmers pages
@@ -74,6 +75,7 @@ function App() {
           <Route path="/admin-orders" element={<AdminOrdersPage />} />
           <Route path="/admin-orders-details" element={<AdminOrderDetailsPage />} />
           <Route path="/admin-charts" element={<AdminChartsPage />} />
+          <Route path="/admin-chats" element={<AdminChatsPage />} />
           <Route path="/admin-analytics" element={<AdminAnalyticsPage />} />
         </Route>
       </Routes>

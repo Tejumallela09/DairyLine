@@ -11,16 +11,49 @@ import {
 import { Rating } from "react-simple-star-rating";
 import AddedToCartMessageComponent from "../components/AddedToCartMessageComponent";
 
+import ImageZoom from "js-image-zoom";
+import { useEffect } from "react";
+
 const ProductDetailsPage = () => {
+  var options = {
+    // width: 400,
+    // zoomWidth: 500,
+    // fillContainer: true,
+    // zoomPosition: "bottom",
+    scale: 2,
+    offset: { vertical: 0, horizontal: 0 },
+  };
+  useEffect(() => {
+    new ImageZoom(document.getElementById("first"), options);
+    new ImageZoom(document.getElementById("second"), options);
+    new ImageZoom(document.getElementById("third"), options);
+    new ImageZoom(document.getElementById("fourth"), options);
+  });
   return (
     <Container>
       <AddedToCartMessageComponent />
       <Row className="mt-5">
-        <Col md={4}>
-        <Image fluid src="/images/product1.jpg" />
-          <Image fluid src="/images/product2.jpg" />
-          <Image fluid src="/images/product3.jpg" />
-          <Image fluid src="/images/product4.jpg" />
+        <Col style={{ zIndex: 1 }} md={4}>
+          <div id="first">
+            <Image
+              crossOrigin="anonymous"
+              fluid
+              src="/images/product1.jpg"
+            />
+          </div>
+          <br />
+          <div id="second">
+            <Image fluid src="/images/product2.jpg" />
+          </div>
+          <br />
+          <div id="third">
+            <Image fluid src="/images/product3.jpg" />
+          </div>
+          <br />
+          <div id="fourth">
+            <Image fluid src="/images/product4.jpg" />
+          </div>
+          <br />
         </Col>
         <Col md={8}>
           <Row>
@@ -57,7 +90,7 @@ const ProductDetailsPage = () => {
                   </Form.Select>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Button variant="danger">Select Farmer</Button>
+                  <Button variant="danger">Add to cart</Button>
                 </ListGroup.Item>
               </ListGroup>
             </Col>
@@ -68,11 +101,11 @@ const ProductDetailsPage = () => {
               <ListGroup variant="flush">
                 {Array.from({ length: 10 }).map((item, idx) => (
                   <ListGroup.Item key={idx}>
-                      John Doe <br />
-                      <Rating readonly size={20}  initialValue={4}/>
-                      <br />
-                      20-09-2001 <br />
-                      Porta ac consectetur ac Lorem ipsum dolor, sit amet
+                    John Doe <br />
+                    <Rating readonly size={20} initialValue={4} />
+                    <br />
+                    20-09-2001 <br />
+                    Porta ac consectetur ac Lorem ipsum dolor, sit amet
                     consectetur adipisicing elit. Perferendis, illo.
                   </ListGroup.Item>
                 ))}
@@ -83,7 +116,6 @@ const ProductDetailsPage = () => {
           <Alert variant="danger">Login first to write a review</Alert>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              
               <Form.Label>Write a review</Form.Label>
               <Form.Control as="textarea" rows={3} />
             </Form.Group>
@@ -95,7 +127,9 @@ const ProductDetailsPage = () => {
               <option value="2">2 (bad)</option>
               <option value="1">1 (awful)</option>
             </Form.Select>
-            <Button className="mb-3 mt-3" variant="primary">Submit</Button>
+            <Button className="mb-3 mt-3" variant="primary">
+              Submit
+            </Button>
           </Form>
         </Col>
       </Row>
