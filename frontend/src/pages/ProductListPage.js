@@ -2,6 +2,7 @@ import { Container, Row, Col,Button } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
 import SortOptionsComponent from '../components/SortOptionsComponent.js'
 import RatingfilterComponent from '../components/filterQueryResultOptions/RatingFilterComponent.js'
+import CategoryFilterComponent from '../components/filterQueryResultOptions/CategoryFilterComponent.js'
 import ProductForListComponent from '../components/ProductForListComponent.js'
 const ProductListPage = () => {//arrow function
     // return <p>This is Product List Page </p>
@@ -10,8 +11,9 @@ const ProductListPage = () => {//arrow function
             <Row>
                 <Col md={3}>
                     <ListGroup>
-                        <ListGroup.Item><SortOptionsComponent/></ListGroup.Item>
+                        <ListGroup.Item className='mb-3 mt-3'><SortOptionsComponent/></ListGroup.Item>
                         <ListGroup.Item><RatingfilterComponent/></ListGroup.Item>
+                        <ListGroup.Item><CategoryFilterComponent/></ListGroup.Item>
                         {/* <ListGroup.Item>Morbi leo risus</ListGroup.Item>
                         <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
                         <ListGroup.Item>Vestibulum at eros</ListGroup.Item> */}

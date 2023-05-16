@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 //components
 import ProtectedRoutesComponent from "./components/ProtectedRoutesComponent";
 import FooterComponent from "./components/FooterComponent";
@@ -27,6 +27,8 @@ import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
 import AdminOrderDetailsPage from "./pages/admin/AdminOrderDetailsPage";
 import AdminChartsPage from "./pages/admin/AdminChartsPage";
 import AdminAnalyticsPage from "./pages/admin/AdminAnalyticsPage";
+import ScrollToTop from "./utils/ScrollToTop";
+//protected farmers pages
 import FarmerProfilepage from "./pages/farmer/FarmerProfilepage";
 import FarmerCreateProductspage from "./pages/farmer/FarmerCreateProductspage";
 import FarmerEditProductPage from "./pages/farmer/FarmerEditProductPage";
@@ -35,48 +37,49 @@ import FarmerProductPage from "./pages/farmer/FarmerProductPage";
 function App() {
   return (
     <BrowserRouter>
-    <HeaderComponent/>
-    <Routes>
-      <Route element = {<RouteWithUserChatComponent/>}>
-      {/* publicly available routes */}
-      <Route path="/" element={ <HomePage />} />
-      <Route path="/product-list" element={ <ProductListPage />} />
-      <Route path="/product-details" element={ <ProductDetailsPage />} />
-      <Route path="/cart" element={ <CartPage />} />
-      <Route path="/login" element={ <LoginPage />} />
-      <Route path="/register" element={ <RegisterPage />} />
-      <Route path="*" element="Page not exists 404" />
-      </Route>
-      {/* user protected routes: */}
-      <Route element={<ProtectedRoutesComponent admin={false}/>}>
-      <Route path="/user-profile" element={ <UserProfilePage />} />
-      <Route path="/user-orders" element={ <UserOrderPage />} />
-      <Route path="/user-cart-details" element={ <UserCartDetailsPage />} />
-      <Route path="/user-order-details" element={ <UserOrderDetailsPage />} />
-      </Route>
-      {/* farmer protected routes: */}
-      <Route element={<ProtectedRoutesComponent admin={false}/>}>
-      <Route path="/farmer-profile" element={ <FarmerProfilepage />} />
-      <Route path="/farmer-create-products" element={ <FarmerCreateProductspage />} />
-      <Route path="/user-cart-details" element={ <UserCartDetailsPage />} />
-      <Route path="/user-order-details" element={ <UserOrderDetailsPage />} />
-      </Route>
-      {/* admin protected routes: */}
-      <Route element={<ProtectedRoutesComponent admin={true}/>}>
-      <Route path="/admin-user" element={ <AdminUserPage />} />
-      <Route path="/admin-edit-user" element={ <AdminEditUserPage />} />
-      <Route path="/admin-products" element={ <AdminProductPage />} />
-      <Route path="/admin-create-products" element={ <AdminCreatProductPage/>} />
-      <Route path="/admin-edit-products" element={ <AdminEditProductPage/>} />
-      <Route path="/admin-orders" element={ <AdminOrdersPage />} />
-      <Route path="/admin-orders-details" element={ <AdminOrderDetailsPage />} />
-      <Route path="/admin-charts" element={ <AdminChartsPage />} />
-      <Route path="/admin-analytics" element={ <AdminAnalyticsPage />} />
-      </Route>
+      <ScrollToTop />
+      <HeaderComponent />
+      <Routes>
+        <Route element={<RouteWithUserChatComponent />}>
+          {/* publicly available routes */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/product-list" element={<ProductListPage />} />
+          <Route path="/product-details" element={<ProductDetailsPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="*" element="Page not exists 404" />
+        </Route>
+        {/* user protected routes: */}
+        <Route element={<ProtectedRoutesComponent admin={true} />}>
+          <Route path="/user-profile" element={<UserProfilePage />} />
+          <Route path="/user-orders" element={<UserOrderPage />} />
+          <Route path="/user-cart-details" element={<UserCartDetailsPage />} />
+          <Route path="/user-order-details" element={<UserOrderDetailsPage />} />
+        </Route>
+        {/* farmer protected routes: */}
+        <Route element={<ProtectedRoutesComponent admin={true} />}>
+          <Route path="/farmer-profile" element={<FarmerProfilepage />} />
+          <Route path="/farmer-create-products" element={<FarmerCreateProductspage />} />
+          <Route path="/user-cart-details" element={<UserCartDetailsPage />} />
+          <Route path="/user-order-details" element={<UserOrderDetailsPage />} />
+        </Route>
+        {/* admin protected routes: */}
+        <Route element={<ProtectedRoutesComponent admin={false} />}>
+          <Route path="/admin-user" element={<AdminUserPage />} />
+          <Route path="/admin-edit-user" element={<AdminEditUserPage />} />
+          <Route path="/admin-products" element={<AdminProductPage />} />
+          <Route path="/admin-create-products" element={<AdminCreatProductPage />} />
+          <Route path="/admin-edit-products" element={<AdminEditProductPage />} />
+          <Route path="/admin-orders" element={<AdminOrdersPage />} />
+          <Route path="/admin-orders-details" element={<AdminOrderDetailsPage />} />
+          <Route path="/admin-charts" element={<AdminChartsPage />} />
+          <Route path="/admin-analytics" element={<AdminAnalyticsPage />} />
+        </Route>
       </Routes>
-      <FooterComponent/>
-      </BrowserRouter>
-   
+      <FooterComponent />
+    </BrowserRouter>
+
   );
 }
 
