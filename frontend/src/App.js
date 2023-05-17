@@ -35,6 +35,8 @@ import FarmerCreateProductspage from "./pages/farmer/FarmerCreateProductspage";
 import FarmerEditProductPage from "./pages/farmer/FarmerEditProductPage";
 import FarmerOrderDetailsPage from "./pages/farmer/FarmerOrderDetailsPage";
 import FarmerProductPage from "./pages/farmer/FarmerProductPage";
+import FarmerCapitalBudgettingPage from "./pages/farmer/FarmerCapitalBudgetting";
+import FarmerVetListPage from "./pages/farmer/FarmerVetListPage";
 function App() {
   return (
     <BrowserRouter>
@@ -62,11 +64,14 @@ function App() {
         <Route element={<ProtectedRoutesComponent admin={true} />}>
           <Route path="/farmer-profile" element={<FarmerProfilepage />} />
           <Route path="/farmer-create-products" element={<FarmerCreateProductspage />} />
-          <Route path="/user-cart-details" element={<UserCartDetailsPage />} />
-          <Route path="/user-order-details" element={<UserOrderDetailsPage />} />
+          <Route path="/farmer-edit-products" element={<FarmerEditProductPage />} />
+          <Route path="/farmer-order-details" element={<FarmerOrderDetailsPage />} />
+          <Route path="/farmer-product" element={<FarmerProductPage />} />
+          <Route path="/farmer-vet-list" element={<FarmerVetListPage />} />
+          <Route path="/farmer-cb" element={<FarmerCapitalBudgettingPage />} />
         </Route>
         {/* admin protected routes: */}
-        <Route element={<ProtectedRoutesComponent admin={false} />}>
+        <Route element={<ProtectedRoutesComponent admin={true} />}>
           <Route path="/admin-user" element={<AdminUserPage />} />
           <Route path="/admin-edit-user" element={<AdminEditUserPage />} />
           <Route path="/admin-products" element={<AdminProductPage />} />

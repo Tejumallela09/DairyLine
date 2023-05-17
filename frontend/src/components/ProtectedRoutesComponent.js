@@ -6,7 +6,7 @@ const ProtectedRoutesComponent = ({ admin }) => {
         return adminAuth ? <Outlet /> : <Navigate to="/login" />;
     }
     else {
-        let userAuth = false;
+        let userAuth = true;
         return userAuth ? <><UserChatComponent /><Outlet /></> : <Navigate to="/login" />;
     }
 

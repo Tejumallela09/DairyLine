@@ -68,6 +68,7 @@ const HomePage = () => {
                             </p>
                         </Col>
                     </Row>
+                    <div></div>
                     <Row className="mt-5">
                         <Col>
                             <h2 className="mb-3">

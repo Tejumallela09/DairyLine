@@ -4,6 +4,7 @@ import SortOptionsComponent from '../components/SortOptionsComponent.js'
 import RatingfilterComponent from '../components/filterQueryResultOptions/RatingFilterComponent.js'
 import CategoryFilterComponent from '../components/filterQueryResultOptions/CategoryFilterComponent.js'
 import ProductForListComponent from '../components/ProductForListComponent.js'
+import PaginationComponent from '../components/PaginationComponent.js'
 const ProductListPage = () => {//arrow function
     // return <p>This is Product List Page </p>
     return (
@@ -31,7 +32,8 @@ const ProductListPage = () => {//arrow function
                        
                 </Col>
             </Row>
+            <PaginationComponent/>
         </Container>
     )
 }
-export default ProductListPage;// i do export here in order to import that file here in App.js
+export default ProductListPage;// i do export here in order to import that file here in App.jsnp
