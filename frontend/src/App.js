@@ -71,7 +71,7 @@ function App() {
           <Route path="/farmer-cb" element={<FarmerCapitalBudgettingPage />} />
         </Route>
         {/* admin protected routes: */}
-        <Route element={<ProtectedRoutesComponent admin={true} />}>
+        <Route element={<ProtectedRoutesComponent farmer={true} />}>
           <Route path="/admin-user" element={<AdminUserPage />} />
           <Route path="/admin-edit-user" element={<AdminEditUserPage />} />
           <Route path="/admin-products" element={<AdminProductPage />} />
