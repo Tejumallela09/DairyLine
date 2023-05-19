@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const reviewSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
   firstname: {
     type: String,
     required: true, // compulsonry property
@@ -8,13 +8,13 @@ const reviewSchema = mongoose.Schema({
     type: String,
     required: true, // compulsonry property
   },
-  email: {
-    type: String,
-    required: true, // compulsonry property
-    unique: true,
-  },
+  // email: {
+  //   type: String,
+  //   required: true, // compulsonry property
+  //   unique: true,
+  // },
   phoneNumber: {
-    type: Number,
+    type: String,
     required: true, // compulsonry property
     unique: true,
   },

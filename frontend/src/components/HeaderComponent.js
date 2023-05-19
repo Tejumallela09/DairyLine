@@ -11,18 +11,18 @@ const HeaderComponent = () => {
                     </LinkContainer>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
-                         <Nav className="me-auto">
+                         {/* <Nav className="me-auto">
                               <InputGroup>
-                                   {/* <DropdownButton variant="dark" id="dropdown-basic-button" title="All" >
+                                   <DropdownButton variant="dark" id="dropdown-basic-button" title="All" >
                                         <Dropdown.Item >Electronics</Dropdown.Item>
                                         <Dropdown.Item >Books</Dropdown.Item>
                                         <Dropdown.Item >Cars</Dropdown.Item>
-                                   </DropdownButton> */}
+                                   </DropdownButton>
                                    <Form.Control type="text" placeholder="Search in shop.." />
                                    <Button variant="primary"><i className="bi bi-search"></i></Button>
                               </InputGroup>
-                         </Nav>
-                         <Nav>
+                         </Nav> */}
+                         <Nav className="ms-auto">
                               <LinkContainer to="/admin-orders">
                                    <Nav.Link>Admin
                                         <span className="position-absolute top-1 start-10 translate-middle p-2

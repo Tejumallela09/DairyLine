@@ -13,10 +13,14 @@ const reviewSchema = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         required: true,
     },
-    name:{
+    firstname:{
         type: String,
         required: true,
-    }
+    },
+    lastname:{
+      type: String,
+      required: true,
+  }
   }
 },{
     timestamps: true,

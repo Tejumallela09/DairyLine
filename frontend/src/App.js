@@ -17,6 +17,7 @@ import UserOrderPage from "./pages/user/UserOrdersPage";
 import UserCartDetailsPage from "./pages/user/UserCartDetailsPage";
 import UserOrderDetailsPage from "./pages/user/UserOrderDetailsPage";
 import UserProfilePage from "./pages/user/UserProfilepage";
+import UserRegisterPage from "./pages/user/UserRegisterPage";
 //protected admin pages
 import AdminUserPage from "./pages/admin/AdminUserPage";
 import AdminEditUserPage from "./pages/admin/AdminEditUserPage";
@@ -37,6 +38,7 @@ import FarmerOrderDetailsPage from "./pages/farmer/FarmerOrderDetailsPage";
 import FarmerProductPage from "./pages/farmer/FarmerProductPage";
 import FarmerCapitalBudgettingPage from "./pages/farmer/FarmerCapitalBudgetting";
 import FarmerVetListPage from "./pages/farmer/FarmerVetListPage";
+import FarmerRegisterPage from "./pages/farmer/FarmerRegisterPage";
 function App() {
   return (
     <BrowserRouter>
@@ -54,14 +56,15 @@ function App() {
           <Route path="*" element="Page not exists 404" />
         </Route>
         {/* user protected routes: */}
-        <Route element={<ProtectedRoutesComponent admin={true} />}>
+        <Route element={<ProtectedRoutesComponent admin={false} />}>
           <Route path="/user-profile" element={<UserProfilePage />} />
           <Route path="/user-orders" element={<UserOrderPage />} />
           <Route path="/user-cart-details" element={<UserCartDetailsPage />} />
           <Route path="/user-order-details" element={<UserOrderDetailsPage />} />
+          <Route path="/user-register" element={<UserRegisterPage />} />
         </Route>
         {/* farmer protected routes: */}
-        <Route element={<ProtectedRoutesComponent admin={true} />}>
+        <Route element={<ProtectedRoutesComponent farmer={true} />}>
           <Route path="/farmer-profile" element={<FarmerProfilepage />} />
           <Route path="/farmer-create-products" element={<FarmerCreateProductspage />} />
           <Route path="/farmer-edit-products" element={<FarmerEditProductPage />} />
@@ -69,9 +72,10 @@ function App() {
           <Route path="/farmer-product" element={<FarmerProductPage />} />
           <Route path="/farmer-vet-list" element={<FarmerVetListPage />} />
           <Route path="/farmer-cb" element={<FarmerCapitalBudgettingPage />} />
+          <Route path="/farmer-register" element={<FarmerRegisterPage />} />
         </Route>
         {/* admin protected routes: */}
-        <Route element={<ProtectedRoutesComponent farmer={true} />}>
+        <Route element={<ProtectedRoutesComponent admin={true} />}>
           <Route path="/admin-user" element={<AdminUserPage />} />
           <Route path="/admin-edit-user" element={<AdminEditUserPage />} />
           <Route path="/admin-products" element={<AdminProductPage />} />
