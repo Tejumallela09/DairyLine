@@ -5,20 +5,20 @@ import { GiFarmTractor } from 'react-icons/gi';
 import { MdLocalOffer } from 'react-icons/md';
 import ProductCarousalComponent from "../components/user/ProductCarousalComponent";
 const HomePage = () => {
-    const [backgroundImage, setBackgroundImage] = useState("url('/images/farmer2.jpg')");
+    const [backgroundImage, setBackgroundImage] = useState("url('/images/ab1.jpg')");
 
     useEffect(() => {
         const interval = setInterval(() => {
             document.body.style = 'rgba(255, 255, 255, 0.25)';
             const images = [
-                "url('/images/f3.jpg')",
-                "url('/images/farmer3.jpg')",
-                "url('/images/farmer2.jpg')"
+                "url('/images/ab1.jpg')",
+                "url('/images/ab2.jpg')",
+                "url('/images/ab3.jpg')"
                
             ];
             const randomImage = images[Math.floor(Math.random() * images.length)];
             setBackgroundImage(randomImage);
-        }, 5000);
+        }, 3000);
         return () => clearInterval(interval);
     }, []);
 
@@ -77,7 +77,7 @@ const HomePage = () => {
                             <div className="d-flex flex-wrap">
                                 <div
                                     className="card mb-3 mx-2"
-                                    style={{ maxWidth: "18rem" }}
+                                    style={{ maxWidth: "22rem" }}
                                 >
                                     <div className="card-body">
                                         <h5 className="card-title">
@@ -92,7 +92,7 @@ const HomePage = () => {
                                 </div>
                                 <div
                                     className="card mb-3 mx-2"
-                                    style={{ maxWidth: "18rem" }}
+                                    style={{ maxWidth: "22rem" }}
                                 >
                                     <div className="card-body">
                                         <h5 className="card-title"><FaHeart className="mr-2" /> Commitment</h5>
@@ -104,7 +104,7 @@ const HomePage = () => {
                                     </div>
 
                                 </div>
-                                <div className="card mb-3 mx-2" style={{ maxWidth: "18rem" }}>
+                                <div className="card mb-3 mx-2" style={{ maxWidth: "22rem" }}>
                                     <div className="card-body">
                                         <h5 className="card-title"><FaRegHandshake className="mr-2" /> Fairness</h5>
                                         <p className="card-text" style={{ fontSize: '20px' }}>We believe in treating our farmers and customers with fairness and respect. That's why we ensure that our farmers receive fair prices for their products.</p>

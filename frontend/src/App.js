@@ -37,6 +37,7 @@ import FarmerOrderDetailsPage from "./pages/farmer/FarmerOrderDetailsPage";
 import FarmerProductPage from "./pages/farmer/FarmerProductPage";
 import FarmerCapitalBudgettingPage from "./pages/farmer/FarmerCapitalBudgetting";
 import FarmerVetListPage from "./pages/farmer/FarmerVetListPage";
+
 function App() {
   return (
     <BrowserRouter>
@@ -59,6 +60,7 @@ function App() {
           <Route path="/user-orders" element={<UserOrderPage />} />
           <Route path="/user-cart-details" element={<UserCartDetailsPage />} />
           <Route path="/user-order-details" element={<UserOrderDetailsPage />} />
+          
         </Route>
         {/* farmer protected routes: */}
         <Route element={<ProtectedRoutesComponent admin={true} />}>
