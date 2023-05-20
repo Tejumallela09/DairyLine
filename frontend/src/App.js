@@ -38,7 +38,6 @@ import FarmerOrderDetailsPage from "./pages/farmer/FarmerOrderDetailsPage";
 import FarmerProductPage from "./pages/farmer/FarmerProductPage";
 import FarmerCapitalBudgettingPage from "./pages/farmer/FarmerCapitalBudgetting";
 import FarmerVetListPage from "./pages/farmer/FarmerVetListPage";
-import FarmerRegisterPage from "./pages/farmer/FarmerRegisterPage";
 function App() {
   return (
     <BrowserRouter>
