@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import ProtectedRoutesComponent from "./components/ProtectedRoutesComponent";
 import FooterComponent from "./components/FooterComponent";
 import HeaderComponent from "./components/HeaderComponent";
+
 //user components
 import RouteWithUserChatComponent from "./components/user/RouteWithUserChatComponent";
 //publicly available pages
@@ -55,23 +56,22 @@ function App() {
           <Route path="*" element="Page not exists 404" />
         </Route>
         {/* user protected routes: */}
-        <Route element={<ProtectedRoutesComponent admin={false} />}>
+        <Route element={<ProtectedRoutesComponent admin={true} />}>
           <Route path="/user/profile" element={<UserProfilePage />} />
           <Route path="/user/orders" element={<UserOrderPage />} />
-          <Route path="/user/cart-details" element={<UserCartDetailsPage />} />
+          <Route path="/user/cart/details" element={<UserCartDetailsPage />} />
           <Route path="/user/order/details" element={<UserOrderDetailsPage />} />
-          <Route path="/user/register" element={<UserRegisterPage />} />
+          
         </Route>
         {/* farmer protected routes: */}
-        <Route element={<ProtectedRoutesComponent farmer={true} />}>
-          <Route path="/farmer-profile" element={<FarmerProfilepage />} />
-          <Route path="/farmer-create-products" element={<FarmerCreateProductspage />} />
-          <Route path="/farmer-edit-products" element={<FarmerEditProductPage />} />
-          <Route path="/farmer-order-details" element={<FarmerOrderDetailsPage />} />
-          <Route path="/farmer-product" element={<FarmerProductPage />} />
-          <Route path="/farmer-vet-list" element={<FarmerVetListPage />} />
-          <Route path="/farmer-cb" element={<FarmerCapitalBudgettingPage />} />
-          <Route path="/farmer-register" element={<FarmerRegisterPage />} />
+        <Route element={<ProtectedRoutesComponent admin={true} />}>
+          <Route path="/farmer/profile" element={<FarmerProfilepage />} />
+          <Route path="/farmer/create-products" element={<FarmerCreateProductspage />} />
+          <Route path="/farmer/edit-products" element={<FarmerEditProductPage />} />
+          <Route path="/farmer/order-details" element={<FarmerOrderDetailsPage />} />
+          <Route path="/farmer/product" element={<FarmerProductPage />} />
+          <Route path="/farmer/vet/list" element={<FarmerVetListPage />} />
+          <Route path="/farmer/cb" element={<FarmerCapitalBudgettingPage />} />
         </Route>
         {/* admin protected routes: */}
         <Route element={<ProtectedRoutesComponent admin={true} />}>
