@@ -38,6 +38,7 @@ import FarmerOrderDetailsPage from "./pages/farmer/FarmerOrderDetailsPage";
 import FarmerProductPage from "./pages/farmer/FarmerProductPage";
 import FarmerCapitalBudgettingPage from "./pages/farmer/FarmerCapitalBudgetting";
 import FarmerVetListPage from "./pages/farmer/FarmerVetListPage";
+import FarmerRegisterPage from "./pages/farmer/FarmerRegisterPage";
 function App() {
   return (
     <BrowserRouter>
@@ -69,9 +70,9 @@ function App() {
           <Route path="/farmer-edit-products" element={<FarmerEditProductPage />} />
           <Route path="/farmer-order-details" element={<FarmerOrderDetailsPage />} />
           <Route path="/farmer-product" element={<FarmerProductPage />} />
-          <Route path="/farmer-vet-list" element={<FarmerVetListPage />} />
-          <Route path="/farmer-cb" element={<FarmerCapitalBudgettingPage />} />
-          <Route path="/farmer-register" element={<FarmerRegisterPage />} />
+          <Route path="/farmer/vet-list" element={<FarmerVetListPage />} />
+          <Route path="/farmer/cb" element={<FarmerCapitalBudgettingPage />} />
+          <Route path="/farmer/register" element={<FarmerRegisterPage />} />
         </Route>
         {/* admin protected routes: */}
         <Route element={<ProtectedRoutesComponent admin={true} />}>
