@@ -1,10 +1,9 @@
 import { Container, Row, Col,Button } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
-import SortOptionsComponent from '../components/SortOptionsComponent.js'
+import SortOptionsComponent from '../components/filterQueryResultOptions/SortOptionsComponent.js'
 import RatingfilterComponent from '../components/filterQueryResultOptions/RatingFilterComponent.js'
 import CategoryFilterComponent from '../components/filterQueryResultOptions/CategoryFilterComponent.js'
 import ProductForListComponent from '../components/ProductForListComponent.js'
-import PaginationComponent from '../components/PaginationComponent.js'
 const ProductListPage = () => {//arrow function
     // return <p>This is Product List Page </p>
     return (
@@ -32,7 +31,6 @@ const ProductListPage = () => {//arrow function
                        
                 </Col>
             </Row>
-            <PaginationComponent/>
         </Container>
     )
 }

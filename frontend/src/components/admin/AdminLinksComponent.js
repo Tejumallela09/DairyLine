@@ -5,19 +5,19 @@ const AdminLinksComponent = () => {
   return (
     <Navbar bg="light" variant="light">
       <Nav className="flex-column">
-        <LinkContainer to="/admin/orders">
+        <LinkContainer to="/admin-orders">
           <Nav.Link>Orders</Nav.Link>
         </LinkContainer>
-        <LinkContainer to="/admin/products">
+        <LinkContainer to="/admin-products">
           <Nav.Link>Products</Nav.Link>
         </LinkContainer>
-        <LinkContainer to="/admin/users">
+        <LinkContainer to="/admin-users">
           <Nav.Link>Users</Nav.Link>
         </LinkContainer>
-        <LinkContainer to="/admin/chats">
+        <LinkContainer to="/admin-chats">
           <Nav.Link>Chats</Nav.Link>
         </LinkContainer>
-        <LinkContainer to="/admin/analytics">
+        <LinkContainer to="/admin-analytics">
           <Nav.Link>Analytics</Nav.Link>
         </LinkContainer>
         <Nav.Link>Logout</Nav.Link>

@@ -35,7 +35,7 @@ const AdminOrdersPage = () => {
                   </td>
                   <td>PayPal</td>
                   <td>
-                    <Link to="/admin/order-details">go to order</Link>
+                    <Link to="/admin-order-details">go to order</Link>
                   </td>
                 </tr>
               )

@@ -22,7 +22,7 @@ import UserRegisterPage from "./pages/user/UserRegisterPage";
 import AdminUserPage from "./pages/admin/AdminUserPage";
 import AdminEditUserPage from "./pages/admin/AdminEditUserPage";
 import AdminProductPage from "./pages/admin/AdminProductPage";
-import AdminCreatProductPage from "./pages/admin/AdminCreatProductPage";
+import AdminCreateProductPage from "./pages/admin/AdminCreateProductPage";
 import AdminEditProductPage from "./pages/admin/AdminEditProductPage";
 import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
 import AdminOrderDetailsPage from "./pages/admin/AdminOrderDetailsPage";
@@ -57,11 +57,11 @@ function App() {
         </Route>
         {/* user protected routes: */}
         <Route element={<ProtectedRoutesComponent admin={false} />}>
-          <Route path="/user-profile" element={<UserProfilePage />} />
-          <Route path="/user-orders" element={<UserOrderPage />} />
-          <Route path="/user-cart-details" element={<UserCartDetailsPage />} />
-          <Route path="/user-order-details" element={<UserOrderDetailsPage />} />
-          <Route path="/user-register" element={<UserRegisterPage />} />
+          <Route path="/user/profile" element={<UserProfilePage />} />
+          <Route path="/user/orders" element={<UserOrderPage />} />
+          <Route path="/user/cart-details" element={<UserCartDetailsPage />} />
+          <Route path="/user/order/details" element={<UserOrderDetailsPage />} />
+          <Route path="/user/register" element={<UserRegisterPage />} />
         </Route>
         {/* farmer protected routes: */}
         <Route element={<ProtectedRoutesComponent farmer={true} />}>
@@ -79,7 +79,7 @@ function App() {
           <Route path="/admin-user" element={<AdminUserPage />} />
           <Route path="/admin-edit-user" element={<AdminEditUserPage />} />
           <Route path="/admin-products" element={<AdminProductPage />} />
-          <Route path="/admin-create-products" element={<AdminCreatProductPage />} />
+          <Route path="/admin-create-products" element={<AdminCreateProductPage />} />
           <Route path="/admin-edit-products" element={<AdminEditProductPage />} />
           <Route path="/admin-orders" element={<AdminOrdersPage />} />
           <Route path="/admin-orders-details" element={<AdminOrderDetailsPage />} />

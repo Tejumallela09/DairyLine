@@ -13,7 +13,7 @@ const AdminProductsPage = () => {
       <Col md={10}>
         <h1>
           Product List{" "}
-          <LinkContainer to="/admin/create-new-product">
+          <LinkContainer to="/admin-create-products">
             <Button variant="primary" size="lg">
               Create new
             </Button>
