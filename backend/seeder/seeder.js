@@ -5,8 +5,9 @@ const categoryData = require("./categories");
 const farmerData = require("./farmers");
 const reviewData = require("./reviews");
 const userData = require("./users");
-const productData = require("./products")
+const productData = require("./products");
 const orderData = require("./orders");
+const transactionData = require("./transactions");
 
 const Category = require("../models/CategoryModel");
 const Farmer = require("../models/FarmerModel");
@@ -14,6 +15,7 @@ const Review = require("../models/ReviewModel");
 const User = require("../models/UserModel");
 const Order = require("../models/OrderModel");
 const Product = require("../models/ProductModel");
+const Transaction = require("../models/TransactionModel");
 
 const importData = async () => {
   try {
@@ -27,7 +29,7 @@ const importData = async () => {
     await User.collection.deleteMany({});
     await Order.collection.deleteMany({});
     await Product.collection.deleteMany({});
-
+    await Transaction.collection.deleteMany({});
 
     await Category.insertMany(categoryData);
     const reviews = await Review.insertMany(reviewData);
@@ -41,6 +43,7 @@ const importData = async () => {
     await Farmer.insertMany(sampleFarmers);
     await User.insertMany(userData);
     await Order.insertMany(orderData);
+    await Transaction.insertMany(transactionData);
 
     console.log("Seeder data proceeded successfully");
     process.exit();
