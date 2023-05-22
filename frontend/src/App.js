@@ -13,6 +13,7 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import BlogPage from "./pages/BlogPage";
 //protected User pages
 import UserOrderPage from "./pages/user/UserOrdersPage";
 import UserCartDetailsPage from "./pages/user/UserCartDetailsPage";
@@ -39,6 +40,7 @@ import FarmerOrderDetailsPage from "./pages/farmer/FarmerOrderDetailsPage";
 import FarmerProductPage from "./pages/farmer/FarmerProductPage";
 import FarmerCapitalBudgettingPage from "./pages/farmer/FarmerCapitalBudgetting";
 import FarmerVetListPage from "./pages/farmer/FarmerVetListPage";
+
 function App() {
   return (
     <BrowserRouter>
@@ -53,6 +55,7 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/blog/page" element={<BlogPage />} />
           <Route path="*" element="Page not exists 404" />
         </Route>
         {/* user protected routes: */}
