@@ -1,5 +1,5 @@
 const Farmer = require("../models/FarmerModel");
-const { hashPassword,comparePasswords } = require("../utils/hashPasswords");
+const { hashPassword, comparePasswords } = require("../utils/hashPasswords");
 const generateAutthToken = require("../utils/generateAuthToken");
 const recordsPerPage = require("../config/pagination");
 const imageValidate = require("../utils/imageValidate");
@@ -252,12 +252,13 @@ const FarmerFileUpload = async (req, res, next) => {
 
 const adminGetFarmers = async (req, res, next) => {
   try {
+    console.log(req.farmer);
     const farmers = await Farmer.find({})
       .sort({ area: 1 })
-      .select("firstname lastname area phoneNumber");
+      .select("firstname lastname phoneNumber");
     return res.json(farmers);
-  } catch (er) {
-    next(er);
+  } catch (err) {
+    next(err);
   }
 };
 const adminDeleteFarmer = async (req, res, next) => {
@@ -269,7 +270,34 @@ const adminDeleteFarmer = async (req, res, next) => {
     next(err);
   }
 };
+const updateFarmerProfile = async (req, res, next) => {
+  try {
+    const farmer = await Farmer.findById(req.farmer._id).orFail();
+    farmer.firstname = req.body.firstname || farmer.firstname;
+    farmer.lastname = req.body.lastname || farmer.lastname;
+    farmer.phoneNumber = req.body.phoneNumber;
+    farmer.address = req.body.address;
+    farmer.area = req.body.area;
+    farmer.pincode = req.body.pincode;
+    if (req.body.password !== farmer.password) {
+      farmer.password = hashPassword(req.body.password);
+    }
+    await farmer.save();
+    res.json({
+      success:"farmer updated",
+      farmerUpdated:{
+        _id:farmer._id,
+        firstname:farmer.firstname,
+        lastname:farmer.lastname,
+        phoneNumber:farmer.phoneNumber,
+        isAdmin:farmer.isAdmin
 
+      },
+    })
+  } catch (er) {
+    next(er);
+  }
+};
 module.exports = {
   getFarmers,
   getFarmerById,
@@ -279,4 +307,5 @@ module.exports = {
   adminDeleteFarmer,
   registerFarmers,
   loginFarmers,
+  updateFarmerProfile,
 };

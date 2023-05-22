@@ -8,7 +8,9 @@ const {
   adminDeleteFarmer,
   registerFarmers,
   loginFarmers,
+  updateFarmerProfile,
 } = require("../controllers/farmerController");
+const { verifyIsLoggedIn,verifyIsAdmin } = require("../middleware/verifyAuthtoken");
 const router = express.Router();
 
 // router.get("/", (req,res) => {
@@ -16,14 +18,18 @@ const router = express.Router();
 // })
 router.get("/", getFarmers);
 router.get("/get-one/:id", getFarmerById);
-router.post("/uploadImage",FarmerImageUpload);
-router.post("/uploadFile",FarmerFileUpload);
-router.post("/register",registerFarmers);
-router.post("/login",loginFarmers);
+router.post("/uploadImage", FarmerImageUpload);
+router.post("/uploadFile", FarmerFileUpload);
+router.post("/register", registerFarmers);
+router.post("/login", loginFarmers);
+//farmer logged in routes
+router.use(verifyIsLoggedIn);
+router.put("/profile", updateFarmerProfile);
 // router.post("/transactions",)
 
-
 //admin routes:
+router.use(verifyIsLoggedIn);
+router.use(verifyIsAdmin);
 router.get("/admin", adminGetFarmers);
 router.get("/admin/:id", adminDeleteFarmer);
 module.exports = router;
