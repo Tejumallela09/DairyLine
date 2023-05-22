@@ -35,8 +35,6 @@ const HeaderComponent = () => {
                               </LinkContainer>
                               <LinkContainer to="/blog/page">
                                    <Nav.Link>Blog
-                                        <span className="position-absolute top-1 start-10 translate-middle p-2
-                                        bg-danger border border-light rounded-circle"></span>
                                    </Nav.Link>
                               </LinkContainer>
                               <NavDropdown title="Tejaswi" id="collasible-nav-dropdown">
