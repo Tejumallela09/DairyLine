@@ -5,6 +5,7 @@ html {
 
 body {
     margin-bottom: 170px;
+    
 }
 
 footer {
@@ -83,4 +84,12 @@ footer {
     margin-top: 30px;
     padding: 15px 30px;
   }
-  
+  /* transaction page */
+  .filters{
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    box-shadow: 0 0 3px black;
+    
+  }

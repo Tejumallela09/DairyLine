@@ -2,7 +2,6 @@
 //npm install react-date-range
 //npm install react-day-picker
 
-
 import React, { useState } from "react";
 import { Row, Col, ListGroup, Form, Button, Modal } from "react-bootstrap";
 
@@ -23,7 +22,19 @@ const CartItemComponent = () => {
 
   const handleSubscribeClick = () => {
     setShowModal(true);
-    setSelectedDays(selectedSubscription === "daily" ? ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] : []);
+    setSelectedDays(
+      selectedSubscription === "daily"
+        ? [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+          ]
+        : []
+    );
   };
 
   const handleCloseModal = () => {
@@ -33,7 +44,11 @@ const CartItemComponent = () => {
   const handleSubscriptionSelect = (subscription) => {
     setSelectedSubscription(subscription);
     setShowModal(false);
-    setShowCalendar(subscription === "monthly" || subscription === "weekly" || subscription === "daily");
+    setShowCalendar(
+      subscription === "monthly" ||
+        subscription === "weekly" ||
+        subscription === "daily"
+    );
   };
 
   const handleSelect = (ranges) => {
@@ -61,20 +76,24 @@ const CartItemComponent = () => {
     const startDate = selectedRange.startDate.toLocaleDateString();
     const endDate = selectedRange.endDate.toLocaleDateString();
     const selectedDateRange = `${startDate} - ${endDate}`;
-  
+
     if (selectedSubscription === "monthly") {
-      alert(`Your milk will be delivered in this Date Range: ${selectedDateRange}`);
+      alert(
+        `Your milk will be delivered in this Date Range: ${selectedDateRange}`
+      );
       setSelectedSubscription("monthly");
     } else if (selectedSubscription === "weekly") {
-      alert(`Your milk will be delivered on these Selected Days in every week: ${selectedDays.join(", ")}`);
+      alert(
+        `Your milk will be delivered on these Selected Days in every week: ${selectedDays.join(
+          ", "
+        )}`
+      );
       setSelectedSubscription("weekly");
-    }
-    else if(selectedSubscription=== "daily"){
+    } else if (selectedSubscription === "daily") {
       alert(`Your milk will be delivered daily`);
       setSelectedSubscription("daily");
     }
   };
-  
 
   return (
     <>
@@ -106,13 +125,19 @@ const CartItemComponent = () => {
               <Button variant="primary" size="sm" className="me-2">
                 Buy Once
               </Button>
-              <Button variant="success" size="sm" onClick={handleSubscribeClick}>
-  {selectedSubscription === "weekly" ? "Weekly" : selectedSubscription === "monthly" ? "Monthly" : selectedSubscription === "daily" ? "Daily" : "Subscribe"}
-</Button>
-
-
-
-
+              <Button
+                variant="success"
+                size="sm"
+                onClick={handleSubscribeClick}
+              >
+                {selectedSubscription === "weekly"
+                  ? "Weekly"
+                  : selectedSubscription === "monthly"
+                  ? "Monthly"
+                  : selectedSubscription === "daily"
+                  ? "Daily"
+                  : "Subscribe"}
+              </Button>
             </div>
           </Col>
         </Row>
@@ -148,138 +173,156 @@ const CartItemComponent = () => {
       </Modal>
 
       {showCalendar && selectedSubscription === "monthly" && (
-  <div className="mt-1">
-    <DateRangePicker ranges={[selectedRange]} onChange={handleSelect} />
-    <Button variant="primary" className="mt-3" onClick={handleSubmit}>
-      Submit
-    </Button>
-  </div>
-)}
-{showCalendar && selectedSubscription === "daily" && (
-  <div className="mt-1">
-    <Form.Group>
-      <Form.Check
-        inline
-        label="Monday"
-        value="Monday"
-        type="checkbox"
-        checked={true}
-        onChange={handleDaySelect}
-      />
-      <Form.Check
-        inline
-        label="Tuesday"
-        value="Tuesday"
-        type="checkbox"
-        checked={true}
-        onChange={handleDaySelect}
-      />
-      <Form.Check
-        inline
-        label="Wednesday"
-        value="Wednesday"
-        type="checkbox"
-        checked={true}
-        onChange={handleDaySelect}
-      />
-      <Form.Check
-        inline
-        label="Thursday"
-        value="Thursday"
-        type="checkbox"
-        checked={true}
-        onChange={handleDaySelect}
-      />
-      <Form.Check
-        inline
-        label="Friday"
-        value="Friday"
-        type="checkbox"
-        checked={true}
-        onChange={handleDaySelect}
-      />
-      <Form.Check
-        inline
-        label="Saturday"
-        value="Saturday"
-        type="checkbox"
-        checked={true}
-        onChange={handleDaySelect}
-      />
-      <Form.Check
-        inline
-        label="Sunday"
-        value="Sunday"
-        type="checkbox"
-        checked={true}
-        onChange={handleDaySelect}
-      />
-    </Form.Group>
-    <Button variant="primary" className="mt-3" onClick={handleSubmit}>
-      Submit
-    </Button>
-  </div>
-)}
+        <div className="mt-1">
+          <DateRangePicker ranges={[selectedRange]} onChange={handleSelect} />
+          <Button variant="primary" className="mt-3" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </div>
+      //   <div className="mt-1">
+      //   <DatePicker
+      //     selected={selectedDate}
+      //     onChange={handleDateSelect}
+      //     dateFormat="dd/MM/yyyy"
+      //     minDate={new Date()}
+      //     // Add any other props you need for the DatePicker component
+      //   />
+      //   <Button variant="primary" className="mt-3" onClick={handleSubmit}>
+      //     Submit
+      //   </Button>
+      // </div>
+      )}
+      {showCalendar && selectedSubscription === "daily" && (
+        <div className="mt-1">
+          <Form.Group>
+            <Form.Check
+              inline
+              label="Monday"
+              value="Monday"
+              type="checkbox"
+              checked={true}
+              onChange={handleDaySelect}
+              style={{ display: 'none' }}
+            />
+            <Form.Check
+              inline
+              label="Tuesday"
+              value="Tuesday"
+              type="checkbox"
+              checked={true}
+              onChange={handleDaySelect}
+              style={{ display: 'none' }}
+            />
+            <Form.Check
+              inline
+              label="Wednesday"
+              value="Wednesday"
+              type="checkbox"
+              checked={true}
+              onChange={handleDaySelect}
+              style={{ display: 'none' }}
+            />
+            <Form.Check
+              inline
+              label="Thursday"
+              value="Thursday"
+              type="checkbox"
+              checked={true}
+              onChange={handleDaySelect}
+              style={{ display: 'none' }}
+            />
+            <Form.Check
+              inline
+              label="Friday"
+              value="Friday"
+              type="checkbox"
+              checked={true}
+              onChange={handleDaySelect}
+              style={{ display: 'none' }}
+            />
+            <Form.Check
+              inline
+              label="Saturday"
+              value="Saturday"
+              type="checkbox"
+              checked={true}
+              onChange={handleDaySelect}
+              style={{ display: 'none' }}
+            />
+            <Form.Check
+              inline
+              label="Sunday"
+              value="Sunday"
+              type="checkbox"
+              checked={true}
+              onChange={handleDaySelect}
+              style={{ display: 'none' }}
+            />
+          </Form.Group>
+          <Button variant="primary" className="mt-3" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </div>
+      )}
 
-{showCalendar && selectedSubscription === "weekly" && (
-  <div className="mt-1">
-    <Form.Group>
-      <Form.Check
-        inline
-        label="Monday"
-        value="Monday"
-        type="checkbox"
-        onChange={handleDaySelect}
-      />
-      <Form.Check
-        inline
-        label="Tuesday"
-        value="Tuesday"
-        type="checkbox"
-        onChange={handleDaySelect}
-      />
-      <Form.Check
-        inline
-        label="Wednesday"
-        value="Wednesday"
-        type="checkbox"
-        onChange={handleDaySelect}
-      />
-      <Form.Check
-        inline
-        label="Thursday"
-        value="Thursday"
-        type="checkbox"
-        onChange={handleDaySelect}
-      />
-      <Form.Check
-        inline
-        label="Friday"
-        value="Friday"
-        type="checkbox"
-        onChange={handleDaySelect}
-      />
-      <Form.Check
-        inline
-        label="Saturday"
-        value="Saturday"
-        type="checkbox"
-        onChange={handleDaySelect}
-      />
-      <Form.Check
-        inline
-        label="Sunday"
-        value="Sunday"
-        type="checkbox"
-        onChange={handleDaySelect}
-      />
-    </Form.Group>
-    <Button variant="primary" className="mt-3" onClick={handleSubmit}>
-      Submit
-    </Button>
-  </div>
-)}
-
+      {showCalendar && selectedSubscription === "weekly" && (
+        <div className="mt-1">
+          <Form.Group>
+            <Form.Check
+              inline
+              label="Monday"
+              value="Monday"
+              type="checkbox"
+              onChange={handleDaySelect}
+            />
+            <Form.Check
+              inline
+              label="Tuesday"
+              value="Tuesday"
+              type="checkbox"
+              onChange={handleDaySelect}
+            />
+            <Form.Check
+              inline
+              label="Wednesday"
+              value="Wednesday"
+              type="checkbox"
+              onChange={handleDaySelect}
+            />
+            <Form.Check
+              inline
+              label="Thursday"
+              value="Thursday"
+              type="checkbox"
+              onChange={handleDaySelect}
+            />
+            <Form.Check
+              inline
+              label="Friday"
+              value="Friday"
+              type="checkbox"
+              onChange={handleDaySelect}
+            />
+            <Form.Check
+              inline
+              label="Saturday"
+              value="Saturday"
+              type="checkbox"
+              onChange={handleDaySelect}
+            />
+            <Form.Check
+              inline
+              label="Sunday"
+              value="Sunday"
+              type="checkbox"
+              onChange={handleDaySelect}
+            />
+          </Form.Group>
+          <Button variant="primary" className="mt-3" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </div>
+      )}
     </>
   );
 };

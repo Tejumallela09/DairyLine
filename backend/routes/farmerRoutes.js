@@ -20,6 +20,7 @@ router.post("/uploadImage",FarmerImageUpload);
 router.post("/uploadFile",FarmerFileUpload);
 router.post("/register",registerFarmers);
 router.post("/login",loginFarmers);
+// router.post("/transactions",)
 
 
 //admin routes:

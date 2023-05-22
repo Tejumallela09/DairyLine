@@ -21,10 +21,6 @@ const farmerSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    // age: {
-    //   type: Number,
-    //   required: true, // compulsonry property
-    // },
     phoneNumber: {
       type: String,
       required: true, // compulsonry property
@@ -35,22 +31,12 @@ const farmerSchema = mongoose.Schema(
       required: true,
     },
     area: { type: String, required: true },
-    // district: {
-    //   type: String,
-    //   required: true,
-    // },
     pincode: {
       type: String,
       required: true,
     },
-
-    // category:{
-    //     type:String,
-    //     required: true,// compulsonry property
-    // },
     rating: {
       type: Number,
-      // required: true,// compulsonry property
     },
     reviewsNumber: {
       type: Number,
