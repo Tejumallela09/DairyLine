@@ -8,6 +8,8 @@ const userData = require("./users");
 const productData = require("./products");
 const orderData = require("./orders");
 const transactionData = require("./transactions");
+const veterinaryData = require("./veterinary");
+console.log(process.argv[2]);
 
 const Category = require("../models/CategoryModel");
 const Farmer = require("../models/FarmerModel");
@@ -16,6 +18,7 @@ const User = require("../models/UserModel");
 const Order = require("../models/OrderModel");
 const Product = require("../models/ProductModel");
 const Transaction = require("../models/TransactionModel");
+const Veterinary = require("../models/VeterinaryModel");
 
 const importData = async () => {
   try {
@@ -30,22 +33,27 @@ const importData = async () => {
     await Order.collection.deleteMany({});
     await Product.collection.deleteMany({});
     await Transaction.collection.deleteMany({});
+    await Veterinary.collection.deleteMany({});
 
-    await Category.insertMany(categoryData);
-    const reviews = await Review.insertMany(reviewData);
-    const sampleFarmers = farmerData.map((farmer) => {
-      reviews.map((review) => {
-        farmer.reviews.push(review._id);
+    if(process.argv[2]!=="-d"){
+      await Category.insertMany(categoryData);
+      const reviews = await Review.insertMany(reviewData);
+      const sampleFarmers = farmerData.map((farmer) => {
+        reviews.map((review) => {
+          farmer.reviews.push(review._id);
+        });
+        return { ...farmer };
       });
-      return { ...farmer };
-    });
-    await Product.insertMany(productData);
-    await Farmer.insertMany(sampleFarmers);
-    await User.insertMany(userData);
-    await Order.insertMany(orderData);
-    await Transaction.insertMany(transactionData);
+      await Product.insertMany(productData);
+      await Farmer.insertMany(sampleFarmers);
+      await User.insertMany(userData);
+      await Order.insertMany(orderData);
+      await Transaction.insertMany(transactionData);
+      await Veterinary.insertMany(veterinaryData);
+    }
+   
 
-    console.log("Seeder data proceeded successfully");
+    console.log("Seeder data imported successfully");
     process.exit();
   } catch (er) {
     console.log("Error while processing seeder data", er);
