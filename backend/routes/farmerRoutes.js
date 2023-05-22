@@ -25,6 +25,7 @@ router.post("/login", loginFarmers);
 //farmer logged in routes
 router.use(verifyIsLoggedIn);
 router.put("/profile", updateFarmerProfile);
+router.get("/profile/:id", updateFarmerProfile);
 // router.post("/transactions",)
 
 //admin routes:

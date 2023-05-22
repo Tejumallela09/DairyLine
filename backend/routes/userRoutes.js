@@ -8,6 +8,7 @@ const {
   registerUsers,
   loginUsers,
   updateUserProfile,
+  getUserProfile,
 } = require("../controllers/userController");
 const router = express.Router();
 
@@ -17,12 +18,14 @@ const router = express.Router();
 
 router.post("/register", registerUsers);
 router.post("/login", loginUsers);
-// user logged in routes
+
+// user logged in routes:
 router.use(verifyIsLoggedIn);
 router.put("/profile", updateUserProfile);
+router.get("/profile/:id", getUserProfile);
 
 //admin
-router.get("/", getUsers);
 router.use(verifyIsAdmin);
+router.get("/", getUsers);
 
 module.exports = router;

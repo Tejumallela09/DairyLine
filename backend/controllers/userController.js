@@ -120,29 +120,43 @@ const loginUsers = async (req, res, next) => {
 const updateUserProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).orFail();
-    user.firstname = req.body.firstname || user.firstname;
-    user.lastname = req.body.lastname || user.lastname;
-    user.phoneNumber = req.body.phoneNumber;
+    user.firstname = req.body.name || user.firstname;
+    user.lastName = req.body.lastName || user.lastName;
+    user.phoneNumber = req.body.phoneNumber || user.phoneNumber;
     user.address = req.body.address;
     user.area = req.body.area;
     user.pincode = req.body.pincode;
-    if(req.body.password !== user.password){
-      user.password=hashPassword(req.body.password)
+    if (req.body.password !== user.password) {
+      user.password = hashPassword(req.body.password);
     }
     await user.save();
-    res.json({
-      success:"user updated",
-      userUpdated:{
-        _id:user._id,
-        firstname:user.firstname,
-        lastname:user.lastname,
-        phoneNumber:user.phoneNumber,
-        isAdmin:user.isAdmin
 
+    res.json({
+      success: "user updated",
+      userUpdated: {
+        _id: user._id,
+        firstname: user.firstname,
+        lastName: user.lastName,
+        phoneNumber: user.phoneNumber,
+        isAdmin: user.isAdmin,
       },
-    })
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+const getUserProfile = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id).orFail();
+    return res.send(user);
   } catch (er) {
     next(er);
   }
 };
-module.exports = { getUsers, registerUsers, loginUsers, updateUserProfile };
+module.exports = {
+  getUsers,
+  registerUsers,
+  loginUsers,
+  updateUserProfile,
+  getUserProfile,
+};
