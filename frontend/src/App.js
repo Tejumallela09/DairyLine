@@ -13,6 +13,7 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import BlogPage from "./pages/BlogPage";
 //protected User pages
 import UserOrderPage from "./pages/user/UserOrdersPage";
 import UserCartDetailsPage from "./pages/user/UserCartDetailsPage";
@@ -54,6 +55,7 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/blog/page" element={<BlogPage />} />
           <Route path="*" element="Page not exists 404" />
         </Route>
         {/* user protected routes: */}

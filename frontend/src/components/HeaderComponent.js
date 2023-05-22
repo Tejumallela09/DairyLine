@@ -29,8 +29,13 @@ const HeaderComponent = () => {
                                         bg-danger border border-light rounded-circle"></span>
                                    </Nav.Link>
                               </LinkContainer>
+                              
                               <LinkContainer to="/product-details">
                                    <Nav.Link>Products</Nav.Link>
+                              </LinkContainer>
+                              <LinkContainer to="/blog/page">
+                                   <Nav.Link>Blog
+                                   </Nav.Link>
                               </LinkContainer>
                               <NavDropdown title="Tejaswi" id="collasible-nav-dropdown">
                                    <NavDropdown.Item as={Link} eventKey="/user-orders" to="/user-orders">My Orders</NavDropdown.Item>
