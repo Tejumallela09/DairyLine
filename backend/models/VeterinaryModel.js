@@ -8,11 +8,6 @@ const veterinarySchema = mongoose.Schema({
     type: String,
     required: true, // compulsonry property
   },
-  // email: {
-  //   type: String,
-  //   required: true, // compulsonry property
-  //   unique: true,
-  // },
   phoneNumber: {
     type: String,
     required: true, // compulsonry property
@@ -26,26 +21,9 @@ const veterinarySchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  // district: {
-  //   type: String,
-  //   required: true,
-  // },
   pincode: {
     type: String,
     required: true,
-  },
-  // state:{
-  //   type: String,
-  //   required: true,
-  // },
-  password:{
-    type: String,
-    required: true,
-  },
-  isAdmin:{
-    type:Boolean,
-    required: true,
-    default: false,
   },
 },
 {

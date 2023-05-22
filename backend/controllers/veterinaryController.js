@@ -1,12 +1,12 @@
 const Veterinary = require("../models/VeterinaryModel");
-const getVeteneries = async (req, res, next) => {
-    // Farmer.create({name:"Raju"})
-    // res.send("Handling user routes, e.g. search for users")
-    try {
-      const users = await User.find({}).select("-password");
-      return res.json(users);
-    } catch (er) {
-      next(er);
-    }
-  };
+const getVeterinaries = async (req, res, next) => {
+  try {
+    const { area } = req.query; // Assuming the area is passed as a query parameter, e.g., /veterinaries?area=xyz
+
+    const veterinaries = await Veterinary.find({ area: area });
+    return res.json(veterinaries);
+  } catch (error) {
+    next(error);
+  }
+};
   module.exports = getVeteneries;
