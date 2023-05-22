@@ -15,22 +15,20 @@ const orders = Array.from({ length: 22 }).map((_, idx) => {
     }
     return{
         user: new ObjectId(),
-        orderTotal:{
-            itemsCount:3,
-            cartSubtotal:subtotal
-        },
+        farmer: new ObjectId(),
         cartItems:[
             {
-                firstname:"Product name",
-                lastname:"p1",
-                price:34,
-                image:{path:"/images/f3.jpg"},
+                name:"Product name",
+                // price:34,
+                // image:{path:"/images/f3.jpg"},
                 quantity:532,
                 count:65,
             }
         ],
-        isPaid:false,
-        isDelivered:false,
+        frequency:'daily',
+        days:'everyday',
+        // isPaid:false,
+        // isDelivered:false,
         createdAt:`2022-03-${day}T${hour}:12:36.490+00:00`
     }
 });

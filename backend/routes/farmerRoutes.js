@@ -9,6 +9,7 @@ const {
   registerFarmers,
   loginFarmers,
   updateFarmerProfile,
+  getFarmerProfile
 } = require("../controllers/farmerController");
 const { verifyIsLoggedIn,verifyIsAdmin } = require("../middleware/verifyAuthtoken");
 const router = express.Router();
@@ -25,7 +26,7 @@ router.post("/login", loginFarmers);
 //farmer logged in routes
 router.use(verifyIsLoggedIn);
 router.put("/profile", updateFarmerProfile);
-router.get("/profile/:id", updateFarmerProfile);
+router.get("/profile/:id", getFarmerProfile);
 // router.post("/transactions",)
 
 //admin routes:

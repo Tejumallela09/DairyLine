@@ -298,6 +298,14 @@ const updateFarmerProfile = async (req, res, next) => {
     next(er);
   }
 };
+const getFarmerProfile = async (req, res, next) => {
+  try {
+    const farmer = await Farmer.findById(req.params.id).orFail();
+    return res.send(farmer);
+  } catch (er) {
+    next(er);
+  }
+};
 module.exports = {
   getFarmers,
   getFarmerById,
@@ -308,4 +316,5 @@ module.exports = {
   registerFarmers,
   loginFarmers,
   updateFarmerProfile,
+  getFarmerProfile
 };

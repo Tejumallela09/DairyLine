@@ -37,9 +37,11 @@ const farmerSchema = mongoose.Schema(
     },
     rating: {
       type: Number,
+      default:0,
     },
     reviewsNumber: {
       type: Number,
+      default:0,
     },
     sales: {
       type: Number,

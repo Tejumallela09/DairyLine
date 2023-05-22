@@ -1,4 +1,6 @@
 const User = require("../models/UserModel");
+const Review = require("../models/ReviewModel");
+const Farmer = require("../models/FarmerModel");
 const { hashPassword, comparePasswords } = require("../utils/hashPasswords");
 const generateAutthToken = require("../utils/generateAuthToken");
 const getUsers = async (req, res, next) => {
@@ -153,10 +155,109 @@ const getUserProfile = async (req, res, next) => {
     next(er);
   }
 };
+const writeReview = async (req, res, next) => {
+  const session = await mongoose.startSession();
+  try {
+    // get comment, rating from request.body:
+    const { comment, rating } = req.body;
+    // validate request:
+    if (!(comment && rating)) {
+      return res.status(400).send("All inputs are required");
+    }
+
+    // create review id manually because it is needed also for saving in Product collection
+    const ObjectId = require("mongodb").ObjectId;
+    let reviewId = new ObjectId();
+    session.startTransaction();
+    await Review.create([
+      {
+        _id: reviewId,
+        comment: comment,
+        rating: Number(rating),
+        user: {
+          _id: req.user._id,
+          firstname: req.user.firstname,
+          lastname: req.user.lastname,
+        },
+      },
+    ]);
+
+    const farmer = await Farmer.findById(req.params.farmerId).populate(
+      "reviews"
+    );
+    // res.send(product)
+    const alreadyReviewed = farmer.reviews.find(
+      (r) => r.user._id.toString() === req.user._id.toString()
+    );
+    if (alreadyReviewed) {
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(400).send("product already reviewed");
+    }
+    let frc = [...farmer.reviews];
+    frc.push({ rating: rating });
+    farmer.reviews.push(reviewId);
+    if (farmer.reviews.length === 1) {
+      farmer.rating = Number(rating);
+      farmer.reviewsNumber = 1;
+    } else {
+      farmer.reviewsNumber = farmer.reviews.length;
+      farmer.rating =
+        prc
+          .map((item) => Number(item.rating))
+          .reduce((sum, item) => sum + item, 0) / farmer.reviews.length;
+    }
+    await farmer.save();
+    await session.commitTransaction();
+    session.endSession();
+    res.send("review created");
+  } catch (err) {
+    await session.abortTransaction();
+    // session.endSession();
+    next(err);
+  }
+};
+const getUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id)
+      .select("firstname lastname phoneNumber isAdmin")
+      .orFail();
+    return res.send(user);
+  } catch (er) {
+    next(er);
+  }
+};
+const updateUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id).orFail();
+    user.firstname = req.body.firstname || user.firstname;
+    user.lastname = req.body.lastname || user.lastname;
+    user.phoneNumber = req.body.phoneNumber || user.phoneNumber;
+    user.isAdmin = req.body.isAdmin || user.isAdmin;
+    await user.save();
+    return res.send("user updated");
+  } catch (er) {
+    next(er);
+  }
+};
+const deleteUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id).orFail();
+    await user.remove();
+    res.send("user removed");
+  } catch (er) {
+    next(er);
+  }
+};
+
 module.exports = {
   getUsers,
   registerUsers,
   loginUsers,
   updateUserProfile,
   getUserProfile,
+  writeReview,
+  getUser,
+  updateUser,
+  deleteUser,
 };
