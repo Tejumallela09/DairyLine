@@ -128,7 +128,7 @@ const loginFarmers = async (req, res, next) => {
         )
         .json({
           success: "farmer logged in",
-          userLoggedIn: {
+          farmerLoggedIn: {
             _id: farmer._id,
             firstname: farmer.firstname,
             lastname: farmer.lastname,

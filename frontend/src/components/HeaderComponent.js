@@ -23,7 +23,7 @@ const HeaderComponent = () => {
                               </InputGroup>
                          </Nav> */}
                          <Nav className="ms-auto">
-                              <LinkContainer to="/admin-orders">
+                              <LinkContainer to="/admin/farmers">
                                    <Nav.Link>Admin
                                         <span className="position-absolute top-1 start-10 translate-middle p-2
                                         bg-danger border border-light rounded-circle"></span>
@@ -38,8 +38,9 @@ const HeaderComponent = () => {
                                    </Nav.Link>
                               </LinkContainer>
                               <NavDropdown title="Tejaswi" id="collasible-nav-dropdown">
-                                   <NavDropdown.Item as={Link} eventKey="/user-orders" to="/user-orders">My Orders</NavDropdown.Item>
-                                   <NavDropdown.Item as={Link} eventKey="/user-profile" to="/user-profile">My Profile</NavDropdown.Item>
+                              <NavDropdown.Item as={Link} eventKey="/user/cart" to="/user/cart"><i className="bi bi-cart"></i><span className="ms-1"> MyCart </span> <Badge pill bg="danger">2</Badge></NavDropdown.Item>
+                                   <NavDropdown.Item as={Link} eventKey="/user/orders" to="/user/orders">My Orders</NavDropdown.Item>
+                                   <NavDropdown.Item as={Link} eventKey="/user/profile" to="/user/profile">My Profile</NavDropdown.Item>
                                    <NavDropdown.Item>Logout</NavDropdown.Item>
                               </NavDropdown>
                               <LinkContainer to="/login">
@@ -47,9 +48,6 @@ const HeaderComponent = () => {
                               </LinkContainer>
                               <LinkContainer to="/register">
                                    <Nav.Link>Register</Nav.Link>
-                              </LinkContainer>
-                              <LinkContainer to="/cart">
-                                   <Nav.Link><i className="bi bi-cart"></i><span className="ms-1">Cart </span> <Badge pill bg="danger">2</Badge></Nav.Link>
                               </LinkContainer>
                          </Nav>
                     </Navbar.Collapse>

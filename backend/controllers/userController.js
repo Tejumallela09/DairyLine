@@ -117,8 +117,7 @@ const loginUsers = async (req, res, next) => {
     }
   } catch (er) {
     next(er);
-  }
-};
+  }};
 const updateUserProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).orFail();
@@ -242,8 +241,8 @@ const updateUser = async (req, res, next) => {
 };
 const deleteUser = async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id).orFail();
-    await user.remove();
+    const user = await User.findByIdAndRemove(req.params.id).orFail();
+    // await user.remove();
     res.send("user removed");
   } catch (er) {
     next(er);

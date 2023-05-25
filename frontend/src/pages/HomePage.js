@@ -28,11 +28,12 @@ const HomePage = () => {
         <p></p>
             <div
                 style={{
-                    backgroundImage,
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    height: "115vh"
+                    // backgroundImage,
+                    // backgroundRepeat: "no-repeat",
+                    backgroundSize: "auto",
+                    // backgroundPosition: "center",
+                    height: "155vh",
+                    backgroundColor:"#ECF8F9",
                 }}
             >
                 <Container>

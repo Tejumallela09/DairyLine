@@ -33,5 +33,5 @@ router.get("/profile/:id", getFarmerProfile);
 router.use(verifyIsLoggedIn);
 router.use(verifyIsAdmin);
 router.get("/admin", adminGetFarmers);
-router.get("/admin/:id", adminDeleteFarmer);
+router.delete("/admin/:id", adminDeleteFarmer);
 module.exports = router;
