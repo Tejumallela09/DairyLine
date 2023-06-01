@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { Card, Button, Spinner } from "react-bootstrap";
 import { Row, Col, Form, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-const LoginPageComponent = ({ loginUserApiRequest, loginFarmerApiRequest }) => {
+const LoginPageComponent = ({
+  loginUserApiRequest,
+  loginFarmerApiRequest,
+  reduxDispatch,
+ setReduxFarmerState,
+ setReduxUserState,
+}) => {
   const [farmervalidated, setFarmerValidated] = useState(false);
   const [uservalidated, setUserValidated] = useState(false);
   const [loginUserResponseState, setLoginUserResponseState] = useState({
@@ -31,56 +37,59 @@ const LoginPageComponent = ({ loginUserApiRequest, loginFarmerApiRequest }) => {
             loading: false,
             error: "",
           });
-          if (res.success === "farmer logged in" && !res.farmerLoggedIn.isAdmin) {
-            userNavigate("/farmer/profile", { replace: true });
+          if (res.farmerLoggedIn) {
+            reduxDispatch(setReduxFarmerState(res.farmerLoggedIn));
+            if (res.success === "farmer logged in" && !res.farmerLoggedIn.isAdmin) {
+              window.location.href = '/farmer/profile';
+            } else {
+              window.location.href = '/admin/farmers';
+            }
           } else {
-            userNavigate("/admin/farmers", { replace: true });
+            setLoginFarmerResponseState({ error: "wrong credentials" });
           }
         })
-        .catch((er) =>
-          setLoginFarmerResponseState(
-            er.response.data.message
-              ? er.response.data.message
-              : er.response.data
-          )
-        );
+        .catch((er) => {
+          setLoginFarmerResponseState({ error: "wrong credentials" });
+        });
     }
     setFarmerValidated(true);
   };
+  
   const userNavigate = useNavigate();
 
-const handleCustomerSubmit = (e) => {
-  e.preventDefault();
-  const form = e.currentTarget;
-  const phoneNumber = form.userPhoneNumber.value;
-  const password = form.userPassword.value;
-  const doNotLogout = form.userDoNotLogout.checked;
+  const handleCustomerSubmit = (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const phoneNumber = form.userPhoneNumber.value;
+    const password = form.userPassword.value;
+    const doNotLogout = form.userDoNotLogout.checked;
 
-  if (e.currentTarget.checkValidity() === true && phoneNumber && password) {
-    setLoginUserResponseState({ loading: true });
-    loginUserApiRequest(phoneNumber, password, doNotLogout)
-      .then((res) => {
-        setLoginUserResponseState({
-          success: res.success,
-          loading: false,
-          error: "",
+    if (e.currentTarget.checkValidity() === true && phoneNumber && password) {
+      setLoginUserResponseState({ loading: true });
+      loginUserApiRequest(phoneNumber, password, doNotLogout)
+        .then((res) => {
+          setLoginUserResponseState({
+            success: res.success,
+            loading: false,
+            error: "",
+          });
+          if (res.userLoggedIn) {
+            reduxDispatch(setReduxUserState(res.userLoggedIn));
+            if (res.success === "user logged in" && !res.userLoggedIn.isAdmin) {
+              userNavigate("/user");
+            } else {
+              userNavigate("/admin/farmers");
+            }
+          } else {
+            setLoginUserResponseState({ error: "wrong credentials" });
+          }
+        })
+        .catch((er) => {
+          setLoginUserResponseState({ error: "wrong credentials" });
         });
-        if (res.success === "user logged in" && !res.userLoggedIn.isAdmin) {
-          userNavigate("/user/profile", { replace: true });
-        } else {
-          userNavigate("/admin/farmers", { replace: true });
-        }
-      })
-      .catch((er) => {
-        if (er.response && er.response.data && er.response.data.message) {
-          setLoginUserResponseState(er.response.data.message);
-        } else {
-          setLoginUserResponseState(er.toString());
-        }
-      });
-  }
-  setUserValidated(true);
-};
+    }
+    setUserValidated(true);
+  };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">

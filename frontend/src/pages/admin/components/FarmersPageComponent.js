@@ -2,7 +2,10 @@ import { Row, Col, Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 import { useState, useEffect } from "react";
+import { logoutUser } from "../../../redux/actions/UserActions";
+import { useDispatch } from "react-redux";
 const FarmerPageComponent = ({ fetchFarmers, deleteFarmer }) => {
+  const dispatch = useDispatch();
   const [farmers, setFarmers] = useState([]);
   const [farmerDeleted, setFarmerDeleted] = useState(false);
   const deleteHandler = async (farmerId) => {
@@ -18,13 +21,14 @@ const FarmerPageComponent = ({ fetchFarmers, deleteFarmer }) => {
     fetchFarmers(abctrl)
       .then((res) => setFarmers(res))
       .catch((er) =>
-        setFarmers([
-          {
-            name: er.response.data.message
-              ? er.response.data.message
-              : er.response.data,
-          },
-        ])
+      dispatch(logoutUser())
+        // setFarmers([
+        //   {
+        //     name: er.response.data.message
+        //       ? er.response.data.message
+        //       : er.response.data,
+        //   },
+        // ])
       );
     return () => abctrl.abort();
   }, [farmerDeleted]);

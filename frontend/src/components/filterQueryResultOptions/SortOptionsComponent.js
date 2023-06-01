@@ -1,8 +1,8 @@
 import { Form } from "react-bootstrap";
-
-const SortOptionsComponent = () => {
+// import { useSelector } from "react-redux";
+const SortOptionsComponent = ({setSortOption}) => {
   return (
-    <Form.Select aria-label="Default select example">
+    <Form.Select aria-label="Default select example" onChange={(e)=>setSortOption(e.target.value)}>
       <option>Select Area</option>
       <option value="Chikkadpally">Chikkadpally</option>
       <option value="Himayathnagar">Himayathnagar</option>

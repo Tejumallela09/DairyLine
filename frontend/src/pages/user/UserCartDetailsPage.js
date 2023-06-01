@@ -2,13 +2,10 @@ import {
   Container,
   Row,
   Col,
-  Form,
-  Alert,
   ListGroup,
   Button,
 } from "react-bootstrap";
 import CartItemComponent from "../../components/CartItemComponent";
-
 
 const UserCartDetailsPage = () => {
   return (

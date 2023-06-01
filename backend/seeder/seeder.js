@@ -6,7 +6,7 @@ const farmerData = require("./farmers");
 const reviewData = require("./reviews");
 const userData = require("./users");
 const productData = require("./products");
-const orderData = require("./orders");
+// const orderData = require("./orders");
 const transactionData = require("./transactions");
 const veterinaryData = require("./veterinary");
 console.log(process.argv[2]);
@@ -47,7 +47,7 @@ const importData = async () => {
       await Product.insertMany(productData);
       await Farmer.insertMany(sampleFarmers);
       await User.insertMany(userData);
-      await Order.insertMany(orderData);
+      // await Order.insertMany(orderData);
       await Transaction.insertMany(transactionData);
       await Veterinary.insertMany(veterinaryData);
     }

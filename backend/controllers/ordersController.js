@@ -1,6 +1,7 @@
-const Order = require("../models/OrderModel");
 const ObjectId = require("mongodb").ObjectId;
+const Order = require("../models/OrderModel");
 const Farmer = require("../models/FarmerModel");
+const Product = require("../models/ProductModel");
 const getUserOrders = async (req, res, next) => {
   try {
     const orders = await Order.find({ user: new ObjectId(req.user._id) });
@@ -11,47 +12,52 @@ const getUserOrders = async (req, res, next) => {
 };
 const getOrder = async (req, res, next) => {
   try {
-    const order = await Order.findById(req.params.id)
+    const userId = req.params.id; // User ID passed as a parameter
+    const orders = await Order.find({ user: userId })
+    
       .populate("user", " -password -isAdmin -_id -__v -createdAt -updatedAt")
+      .populate("farmer", "firstname lastname")
       .orFail();
-    res.send(order);
-  } catch (er) {
-    next(er);
+    res.send(orders);
+    
+  } catch (error) {
+    next(error);
   }
 };
+
 const createOrder = async (req, res, next) => {
   try {
-    const { cartItems, frequency } = req.body; // Assuming these fields are provided in the request body
-    if (!cartItems || !frequency) {
-      return res.status(400).send("All inputs are required!");
+    const { id } = req.params; // Farmer ID from the route parameter
+    const { productID, productname, quantity, frequency } = req.body;
+
+    // Check if the farmer exists
+    const farmer = await Farmer.findById(id);
+    if (!farmer) {
+      return res.status(404).json({ error: "Farmer not found" });
     }
 
-    const farmer = await Farmer.findById(req.params.id);
-
-    let days;
-    if (frequency === "daily") {
-      days = "everyday";
-    } else {
-      // Assuming you have a 'days' variable defined or available in the scope
-      days = days;
+    // Check if the product exists
+    const product = await Product.findById(productID);
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
     }
 
-    // Create a new order instance
+    // Create the order
     const order = new Order({
       user: new ObjectId(req.user._id),
-      farmer: farmer,
-      cartItems: cartItems,
-      frequency: frequency,
-      days: days,
+      farmer: farmer._id,
+      productID,
+      productname,
+      quantity,
+      frequency,
     });
 
-    // Save the order to the database
-    const createdOrder = await order.save();
+    // Save the order
+    await order.save();
 
-    console.log(createdOrder); // Check the value of createdOrder in the console
-
-    res.status(201).json(createdOrder); // Return the created order as the response
+    res.status(201).json({ order });
   } catch (error) {
+    res.status(500).json({ error: "An error occurred" });
     next(error);
   }
 };

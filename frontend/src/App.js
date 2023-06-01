@@ -1,17 +1,16 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 //components
 import ProtectedRoutesComponent from "./components/ProtectedRoutesComponent";
 import FooterComponent from "./components/FooterComponent";
 import HeaderComponent from "./components/HeaderComponent";
 
 //user components
-import RouteWithUserChatComponent from "./components/user/RouteWithUserChatComponent";
+// import RouteWithUserChatComponent from "./components/user/RouteWithUserChatComponent";
 //publicly available pages
 import HomePage from "./pages/HomePage";
-import ProductListPage from "./pages/ProductListPage";
-import ProductDetailsPage from "./pages/ProductDetailsPage";
+import FarmerListPage from "./pages/FarmerListPage";
+import FarmerDetailsPage from "./pages/FarmerDetailsPage";
 import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
 import BlogPage from "./pages/BlogPage";
 //protected User pages
 import UserOrderPage from "./pages/user/UserOrdersPage";
@@ -38,49 +37,63 @@ import FarmerProductPage from "./pages/farmer/FarmerProductPage";
 import FarmerCapitalBudgettingPage from "./pages/farmer/FarmerCapitalBudgetting";
 import FarmerVetListPage from "./pages/farmer/FarmerVetListPage";
 import FarmerRegisterPage from "./pages/farmer/FarmerRegisterPage";
+import Exp from "./pages/farmer/Exp";
 function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <HeaderComponent />
       <Routes>
-        <Route element={<RouteWithUserChatComponent />}>
+        {/* <Route element={<RouteWithUserChatComponent />}> */}
           {/* publicly available routes */}
           <Route path="/" element={<HomePage />} />
-          <Route path="/product-list" element={<ProductListPage />} />
-          <Route path="/product-details" element={<ProductDetailsPage />} />
+          <Route path="/farmer-list" element={<FarmerListPage />} />
+          <Route path="/farmer-details/:id" element={<FarmerDetailsPage />} />
           <Route path="/login" element={<LoginPage />} />
-  
+          <Route path="user/register" element={<UserRegisterPage />} />
+          <Route path="/farmer/register" element={<FarmerRegisterPage />} />
           <Route path="/blog/page" element={<BlogPage />} />
           <Route path="*" element="Page not exists 404" />
-        </Route>
+        {/* </Route> */}
         {/* user protected routes: */}
-        <Route element={<ProtectedRoutesComponent admin={true} />}>
-          <Route path="/user/profile" element={<UserProfilePage />} />
+        <Route element={<ProtectedRoutesComponent admin={false} />}>
+          <Route path="/user" element={<UserProfilePage />} />
           <Route path="/user/cart" element={<UserCartPage />} />
           <Route path="/user/orders" element={<UserOrderPage />} />
           <Route path="/user/cart/details" element={<UserCartDetailsPage />} />
-          <Route path="/user/register" element={<RegisterPage />} />
-          
         </Route>
         {/* farmer protected routes: */}
-        <Route element={<ProtectedRoutesComponent farmer={true} />}>
+        <Route element={<ProtectedRoutesComponent admin={false} />}>
           <Route path="/farmer/profile" element={<FarmerProfilepage />} />
-          <Route path="/farmer/create-products" element={<FarmerCreateProductspage />} />
-          <Route path="/farmer/edit-products" element={<FarmerEditProductPage />} />
-          <Route path="/farmer/order-details" element={<FarmerOrderDetailsPage />} />
+          <Route
+            path="/farmer/create-products"
+            element={<FarmerCreateProductspage />}
+          />
+          <Route
+            path="/farmer/edit-products"
+            element={<FarmerEditProductPage />}
+          />
+          <Route
+            path="/farmer/order-details"
+            element={<FarmerOrderDetailsPage />}
+          />
           <Route path="/farmer/product" element={<FarmerProductPage />} />
           <Route path="/farmer/vet-list" element={<FarmerVetListPage />} />
-          <Route path="/farmer/cb" element={<FarmerCapitalBudgettingPage />} />
-          <Route path="/farmer/register" element={<FarmerRegisterPage />} />
+          <Route path="/farmer/cb" element={<Exp />} />
         </Route>
         {/* admin protected routes: */}
-        <Route element={<ProtectedRoutesComponent admin={true} />}>
+        <Route path="" element={<ProtectedRoutesComponent admin={true} />}>
           <Route path="/admin/user" element={<AdminUserPage />} />
           <Route path="/admin/edit-user" element={<AdminEditUserPage />} />
           <Route path="/admin/farmers" element={<AdminFarmerPage />} />
-          <Route path="/admin/create-products" element={<AdminCreateProductPage />} />
-          <Route path="/admin/edit-products" element={<AdminEditProductPage />} />
+          <Route
+            path="/admin/create-products"
+            element={<AdminCreateProductPage />}
+          />
+          <Route
+            path="/admin/edit-products"
+            element={<AdminEditProductPage />}
+          />
           <Route path="/admin/charts" element={<AdminChartsPage />} />
           <Route path="/admin/chats" element={<AdminChatsPage />} />
           <Route path="/admin/analytics" element={<AdminAnalyticsPage />} />
@@ -88,7 +101,6 @@ function App() {
       </Routes>
       <FooterComponent />
     </BrowserRouter>
-
   );
 }
 

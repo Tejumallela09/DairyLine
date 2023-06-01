@@ -54,9 +54,15 @@ const farmerSchema = mongoose.Schema(
       },
     // attrs: [{ key: { type: String }, value: { type: String } }],
     //images: [imageSchema],
-    images:[],
+    images:{
+      type: String
+    },
+    // images:[],
     // reviews: []
-    license:[],
+    license:{
+      type: String,
+    },
+    // license:[],
     reviews: [
       {
         type: mongoose.Schema.Types.ObjectId,

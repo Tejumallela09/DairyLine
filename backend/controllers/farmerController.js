@@ -4,6 +4,8 @@ const generateAutthToken = require("../utils/generateAuthToken");
 const recordsPerPage = require("../config/pagination");
 const imageValidate = require("../utils/imageValidate");
 const licenseValidate = require("../utils/licenseValidate");
+const express = require("express");
+
 const getFarmers = async (req, res, next) => {
   try {
     //filter
@@ -60,7 +62,7 @@ const registerFarmers = async (req, res, next) => {
         address
       )
     ) {
-      return res.status(400).send("All inputs are required");
+      return res.status(400).json({ error: "All inputs are required" });
     }
     const farmerExists = await Farmer.findOne({ phoneNumber });
     if (farmerExists) {
@@ -76,16 +78,23 @@ const registerFarmers = async (req, res, next) => {
         area: area,
         address: address,
       });
+      const token = generateAutthToken(
+        farmer._id,
+        farmer.firstname,
+        farmer.lastname,
+        farmer.phoneNumber,
+        farmer.isAdmin
+      );
       res
-        .cookie("access_token", generateAutthToken, {
+        .cookie("access_token", token, {
           httpOnly: true,
           secure: process.env.NOdE_ENV === "prodcution",
           sameSite: "strict",
         })
         .status(201)
         .json({
-          sucess: "Farmer Created ",
-          userCreated: {
+          success: "Farmer Created",
+          farmerCreated: {
             _id: farmer._id,
             firstname: farmer.firstname,
             lastname: farmer.lastname,
@@ -95,6 +104,7 @@ const registerFarmers = async (req, res, next) => {
         });
     }
   } catch (er) {
+    console.error("Error:", er);
     next(er);
   }
 };
@@ -154,100 +164,105 @@ const getFarmerById = async (req, res, next) => {
     next(er);
   }
 };
-const FarmerImageUpload = async (req, res, next) => {
-  try {
-    if (!req.files || !!req.files.images === false) {
-      return res.status(400).send("No files were uploaded.");
-    }
-    const validateResult = imageValidate(req.files.images);
-    if (validateResult.error) {
-      return res.status(400).send(validateResult.error);
-    }
 
-    const path = require("path");
-    const { v4: uuidv4 } = require("uuid");
-    const uploadDirectory = path.resolve(
-      __dirname,
-      "../../frontend",
-      "public",
-      "images",
-      "farmerImages"
-    );
-    // console.log(req.query.farmerId)
-    let farmer = await Farmer.findById(req.query.farmerId).orFail();
-    let imagesTable = [];
-    if (Array.isArray(req.files.images)) {
-      imagesTable = req.files.images;
-      //   res.send("You sent " + req.files.images.length + " images");
-    } else {
-      //   res.send("You sent only one image");
-      imagesTable.push(req.files.images);
+const FarmerImageUpload = async (req, res, next) => {
+  if (req.query.cloudinary === "true") {
+    try {
+      let farmer = await Farmer.findById(req.query.farmerId).orFail();
+      farmer.images = req.body.url ;
+      await farmer.save();
+    } catch (er) {
+      next(er);
     }
-    for (let image of imagesTable) {
-      // console.log(image)
-      // console.log(path.extname(image.name))
-      // console.log(uuidv4())
-      var fileName = uuidv4() + path.extname(image.name);
-      var uploadPath = uploadDirectory + "/" + fileName;
-      farmer.images.push({ path: "/images/farmerImages" + fileName });
-      image.mv(uploadPath, function (err) {
-        if (err) {
-          return res.statuse(500).send(err);
-        }
-      });
-    }
-    await farmer.save();
-    return res.send("Image Uploaded");
-  } catch (err) {
-    next(err);
   }
+  // try {
+  //   if (!req.files || !req.files.images) {
+  //     return res.status(400).send("No file was uploaded.");
+  //   }
+
+  //   const validateResult = imageValidate(req.files.images);
+  //   if (validateResult.error) {
+  //     return res.status(400).send(validateResult.error);
+  //   }
+
+  //   const path = require("path");
+  //   const { v4: uuidv4 } = require("uuid");
+  //   const uploadDirectory = path.resolve(
+  //     __dirname,
+  //     "../../frontend",
+  //     "public",
+  //     "images",
+  //     "farmerImages"
+  //   );
+
+  //   const farmer = await Farmer.findById(req.query.farmerId).orFail();
+  //   const imageFile = req.files.images;
+  //   const fileName = uuidv4() + path.extname(imageFile.name);
+  //   const uploadPath = uploadDirectory + "/" + fileName;
+
+  //   imageFile.mv(uploadPath, function (err) {
+  //     if (err) {
+  //       return res.status(500).send(err);
+  //     }
+  //   });
+
+  //   farmer.images = "/images/farmerImages/" + fileName;
+  //   await farmer.save();
+
+  //   return res.send("Image Uploaded");
+  // } catch (error) {
+  //   next(error);
+  // }
 };
+
 const FarmerFileUpload = async (req, res, next) => {
-  try {
-    if (!req.files || !!req.files.license === false) {
-      return res.status(400).send("No files were uploaded.");
+  if (req.query.cloudinary === "true") {
+    try {
+      let farmer = await Farmer.findById(req.query.farmerId).orFail();
+      farmer.license = req.body.url ;
+      await farmer.save();
+    } catch (er) {
+      next(er);
     }
-    const validateResult = licenseValidate(req.files.license);
-    if (validateResult.error) {
-      return res.status(400).send(validateResult.error);
-    }
-    const path = require("path");
-    const { v4: uuidv4 } = require("uuid");
-    const uploadDirectory = path.resolve(
-      __dirname,
-      "../../frontend",
-      "public",
-      "images",
-      "farmerLicenses"
-    );
-    // console.log(req.query.farmerId)
-    let farmer = await Farmer.findById(req.query.farmerId).orFail();
-    let licensesTable = [];
-    if (Array.isArray(req.files.license)) {
-      licensesTable = req.files.license;
-      //   res.send("You sent " + req.files.license.length + " licenses");
-    } else {
-      licensesTable.push(req.files.license);
-      //   res.send("You sent only one license");
-    }
-    for (let license of licensesTable) {
-      // console.log(license)
-      // console.log(path.extname(license.name))
-      // console.log(uuidv4())
-      var fileName = uuidv4() + path.extname(license.name);
-      var uploadPath = uploadDirectory + "/" + fileName;
-      farmer.license.push({ path: "/images/farmerLicenses" + fileName });
-      license.mv(uploadPath, function (err) {
-        if (err) {
-          return res.statuse(500).send(err);
-        }
-      });
-    }
-    await farmer.save();
-    return res.send("License Uploaded");
-  } catch (error) {
-    next(error);
   }
+  // try {
+  //   if (!req.files || !req.files.license) {
+  //     return res.status(400).send("No file was uploaded.");
+  //   }
+
+  //   const validateResult = licenseValidate(req.files.license);
+  //   if (validateResult.error) {
+  //     return res.status(400).send(validateResult.error);
+  //   }
+
+  //   const path = require("path");
+  //   const { v4: uuidv4 } = require("uuid");
+  //   const uploadDirectory = path.resolve(
+  //     __dirname,
+  //     "../../frontend",
+  //     "public",
+  //     "images",
+  //     "farmerLicenses"
+  //   );
+
+  //   const farmer = await Farmer.findById(req.query.farmerId).orFail();
+  //   const licenseFile = req.files.license;
+  //   const fileName = uuidv4() + path.extname(licenseFile.name);
+  //   const uploadPath = uploadDirectory + "/" + fileName;
+
+  //   licenseFile.mv(uploadPath, function (err) {
+  //     if (err) {
+  //       return res.status(500).send(err);
+  //     }
+  //   });
+
+  //   farmer.license = "/images/farmerLicenses/" + fileName;
+  //   await farmer.save();
+
+  //   return res.send("License Uploaded");
+  // } catch (error) {
+  //   next(error);
+  // }
 };
 
 const adminGetFarmers = async (req, res, next) => {
@@ -284,16 +299,15 @@ const updateFarmerProfile = async (req, res, next) => {
     }
     await farmer.save();
     res.json({
-      success:"farmer updated",
-      farmerUpdated:{
-        _id:farmer._id,
-        firstname:farmer.firstname,
-        lastname:farmer.lastname,
-        phoneNumber:farmer.phoneNumber,
-        isAdmin:farmer.isAdmin
-
+      success: "farmer updated",
+      farmerUpdated: {
+        _id: farmer._id,
+        firstname: farmer.firstname,
+        lastname: farmer.lastname,
+        phoneNumber: farmer.phoneNumber,
+        isAdmin: farmer.isAdmin,
       },
-    })
+    });
   } catch (er) {
     next(er);
   }
@@ -316,5 +330,5 @@ module.exports = {
   registerFarmers,
   loginFarmers,
   updateFarmerProfile,
-  getFarmerProfile
+  getFarmerProfile,
 };

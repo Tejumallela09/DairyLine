@@ -30,9 +30,9 @@ const HomePage = () => {
                 style={{
                     // backgroundImage,
                     // backgroundRepeat: "no-repeat",
-                    backgroundSize: "auto",
+                    backgroundSize: "fill",
                     // backgroundPosition: "center",
-                    height: "155vh",
+                    height: "92vh",
                     backgroundColor:"#ECF8F9",
                 }}
             >

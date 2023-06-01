@@ -11,17 +11,17 @@ const {
   updateFarmerProfile,
   getFarmerProfile
 } = require("../controllers/farmerController");
-const { verifyIsLoggedIn,verifyIsAdmin } = require("../middleware/verifyAuthtoken");
-const router = express.Router();
+const router = express.Router()
+// const uploadImage =require("../utils/upload")
 
-// router.get("/", (req,res) => {
-//     res.send("Handling product routes, e.g. search for products")
-// })
+const { verifyIsLoggedIn,verifyIsAdmin } = require("../middleware/verifyAuthtoken")
 router.get("/", getFarmers);
 router.get("/get-one/:id", getFarmerById);
+
+
+router.post("/register", registerFarmers);
 router.post("/uploadImage", FarmerImageUpload);
 router.post("/uploadFile", FarmerFileUpload);
-router.post("/register", registerFarmers);
 router.post("/login", loginFarmers);
 //farmer logged in routes
 router.use(verifyIsLoggedIn);

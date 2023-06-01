@@ -1,6 +1,7 @@
 const User = require("../models/UserModel");
 const Review = require("../models/ReviewModel");
 const Farmer = require("../models/FarmerModel");
+const mongoose = require('mongoose');
 const { hashPassword, comparePasswords } = require("../utils/hashPasswords");
 const generateAutthToken = require("../utils/generateAuthToken");
 const getUsers = async (req, res, next) => {
@@ -35,7 +36,7 @@ const registerUsers = async (req, res, next) => {
         address
       )
     ) {
-      return res.status(400).send("All inputs are required");
+      return res.status(400).json({ error: "All inputs are required" });
     }
     const userExists = await User.findOne({ phoneNumber });
     if (userExists) {
@@ -51,15 +52,15 @@ const registerUsers = async (req, res, next) => {
         area: area,
         address: address,
       });
+      const token = generateAutthToken(user._id, user.firstname, user.lastname, user.phoneNumber, user.isAdmin);
       res
-        .cookie("access_token", generateAutthToken, {
+        .cookie("access_token", token, {
           httpOnly: true,
           secure: process.env.NOdE_ENV === "prodcution",
           sameSite: "strict",
         })
-        .status(201)
-        .json({
-          sucess: "User Created ",
+        .status(201).json({
+          success: "User Created",
           userCreated: {
             _id: user._id,
             firstname: user.firstname,
@@ -70,6 +71,7 @@ const registerUsers = async (req, res, next) => {
         });
     }
   } catch (er) {
+    console.error("Error:", er);
     next(er);
   }
 };
@@ -121,12 +123,12 @@ const loginUsers = async (req, res, next) => {
 const updateUserProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).orFail();
-    user.firstname = req.body.name || user.firstname;
-    user.lastName = req.body.lastName || user.lastName;
+    user.firstname = req.body.firstname || user.firstname;
+    user.lastName = req.body.lastname || user.lastname;
     user.phoneNumber = req.body.phoneNumber || user.phoneNumber;
-    user.address = req.body.address;
-    user.area = req.body.area;
-    user.pincode = req.body.pincode;
+    user.address = req.body.address||user.address;
+    user.area = req.body.area||user.area;
+    user.pincode = req.body.pincode||user.pincode;
     if (req.body.password !== user.password) {
       user.password = hashPassword(req.body.password);
     }
@@ -201,10 +203,11 @@ const writeReview = async (req, res, next) => {
       farmer.reviewsNumber = 1;
     } else {
       farmer.reviewsNumber = farmer.reviews.length;
-      farmer.rating =
+      let ratingCalc =
         prc
           .map((item) => Number(item.rating))
           .reduce((sum, item) => sum + item, 0) / farmer.reviews.length;
+          farmer.rating=Math.round(ratingCalc)
     }
     await farmer.save();
     await session.commitTransaction();

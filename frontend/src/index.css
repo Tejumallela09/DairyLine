@@ -1,37 +1,26 @@
-html {
-    position: relative;
-    min-height: 100%;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    margin-bottom: 170px;
-    
+  display: flex;
+  flex-direction: column;
+  min-height: 200vh;
+  margin-bottom: -170px; /* Adjust the margin-bottom value to remove the gap */
 }
 
 footer {
-    /* position:-webkit-sticky;
-    bottom: 0;
-    width: 100%;
-    height: 170px;
-    display: flex; */
-    /* display: flex;
-    flex-shrink: 0;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%; */
-    /* position:absolute;
-    left:0;
-    bottom:0; 
-    right:0; */
-    position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+  /* height: 170px;
+  background-color:black; Optional: Set the background color for the footer */
 }
+
+
+
+
+
 
 .login-wrapper {
     height: 100vh;
